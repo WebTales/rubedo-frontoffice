@@ -11,7 +11,7 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
     me.submit=function(){
         me.signupError=null;
         if (config.collectPassword&&$scope.fieldEntity.confirmPassword!=$scope.fieldEntity.password){
-            me.signupError="Passwords do not match.";
+            me.signupError=$scope.rubedo.translate("Blocks.Auth.Error.PasswordsNotMatch");
             return;
         }
         var fields=angular.copy($scope.fieldEntity);
@@ -60,6 +60,7 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
                             });
                         }
                     }
+                    $scope.rubedo.sendGaEvent('/form/', 'sign up');
                 } else {
                     me.signupError=response.data.message;
                 }
