@@ -639,7 +639,7 @@
 
     module.factory('RubedoClickStreamService',['$http','ipCookie',function($http,ipCookie){
         var serviceInstance = {};
-        serviceInstance.logEvent=function(event,args){
+        serviceInstance.logEvent=function(event,eventId,args){
             if (config.fingerprint) {
                 var currentSessionId=ipCookie("sessionId");
                 if (!currentSessionId){
@@ -655,6 +655,7 @@
                     userAgent:navigator.userAgent,
                     sessionId:currentSessionId,
                     event:event,
+                    eventId:eventId,
                     eventArgs:args
                 };
                 return ($http({
