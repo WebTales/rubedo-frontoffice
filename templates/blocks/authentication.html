@@ -38,7 +38,7 @@
                             <input type="submit" class="hidden">
                         </form>
                         <p ng-if="authCtrl.signUpPageUrl">
-                            <a  ng-href="{{authCtrl.signUpPageUrl}}">{{rubedo.translate("Blocks.Auth.Register", "Registration")}}</a>
+                            <a ng-href="{{authCtrl.signUpPageUrl}}" target="_self">{{rubedo.translate("Blocks.Auth.Register", "Registration")}}</a>
                         </p>
                         <a href ng-click="authCtrl.recoverPwdModal()">{{rubedo.translate("Blocks.Auth.ForgotPassword", "I lost my password")}}</a>
 
