@@ -181,7 +181,7 @@
         },
         "checkout": {
             "template": "/templates/blocks/checkout.html",
-            "internalDependencies":["/src/modules/rubedoBlocks/controllers/CheckoutController.js"]
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/CheckoutController.js", "/src/modules/rubedoBlocks/controllers/AuthenticationController.js", "/src/modules/rubedoBlocks/controllers/RichTextController.js"]
         },
         "userOrders": {
             "template": "/templates/blocks/userOrders.html",
