@@ -69,6 +69,7 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
                 me.signupError=response.data.message;
             }
         );
+        $scope.rubedo.fireCSEvent("signUpFormSubmit",me.userType.id,{pageId:$scope.rubedo.current.page.id,siteId:$scope.rubedo.current.site.id});
     };
     var queryParams=$location.search();
     if (queryParams.confirmingEmail&&queryParams.userId&&queryParams.signupTime){

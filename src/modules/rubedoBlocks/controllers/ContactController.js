@@ -55,5 +55,6 @@ angular.module("rubedoBlocks").lazy.controller('ContactController',['$scope','Ru
                 me.contactError=response.data.message;
             }
         );
+        $scope.rubedo.fireCSEvent("contactFormSubmit",me.mailingListId,{pageId:$scope.rubedo.current.page.id,siteId:$scope.rubedo.current.site.id});
     };
 }]);
