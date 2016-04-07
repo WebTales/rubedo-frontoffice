@@ -253,7 +253,9 @@
                 }
             } else {
                 if (window.ga) {
-                    window.ga('send', 'pageview', newLoc);
+                    var a = document.createElement('a');
+                    a.href = newLoc;
+                    window.ga('send', 'pageview', a.pathname);
                 }
                 if (currentLoc&&currentLoc!=""&&currentLoc!=newLoc){
                     UXPageService.setAngReferrer(currentLoc);
