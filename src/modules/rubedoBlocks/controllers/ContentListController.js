@@ -191,6 +191,17 @@ angular.module("rubedoBlocks").lazy.controller("ContentListController",['$scope'
                     detectedId=segment;
                 }
             });
+            
+            if(detectedId === null && $scope.rubedo.current.page.blocks) {
+                var blocks = $scope.rubedo.current.page.blocks;
+                for(var key in blocks) {
+                    if(blocks[key].blockData.bType == "contentDetail" && typeof blocks[key].blockData.configBloc.contentId !== "undefined") {
+                        detectedId = blocks[key].blockData.configBloc.contentId;
+                        break;
+                    }
+                }
+            }
+            
             if (detectedId){
                 options.contextContentId=detectedId;
                 options["contextualTaxonomy[]"]=config.contextualTaxonomy;
