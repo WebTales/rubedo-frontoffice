@@ -320,11 +320,32 @@
         return serviceInstance;
     });
 
+    var isACrawler=false;
+    if(navigator.userAgent&&(navigator.userAgent.indexOf("PhantomJS")>-1||navigator.userAgent.indexOf("Prerender")>-1)){
+        isACrawler=true;
+    }
+
     //generic block directive
     module.directive("rubedoBlock",function(){
         return {
             restrict:"E",
-            templateUrl:themePath+"/templates/rubedoBlock.html"
+            templateUrl:themePath+"/templates/rubedoBlock.html",
+            controller: ['$scope', function($scope) {
+                var me=this;
+                $scope.blockConfig=$scope.block.configBloc;
+                me.minBlockHeight=$scope.block.configBloc.blockMinHeight;
+                me.isInView=false;
+                $scope.getBlockMinHeight=function(){
+                    return(me.minBlockHeight);
+                };
+                $scope.blockEnterFOV=function(){
+                    me.isInView=true;
+                };
+                $scope.canDisplayBlock=function(){
+                    var respOk=true;
+                    return (isACrawler||((!$scope.rubedo.current.site.optimizedRender||me.isInView)&&respOk));
+                };
+            }]
         };
     });
 
