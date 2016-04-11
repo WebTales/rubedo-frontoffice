@@ -324,6 +324,24 @@
     if(navigator.userAgent&&(navigator.userAgent.indexOf("PhantomJS")>-1||navigator.userAgent.indexOf("Prerender")>-1)){
         isACrawler=true;
     }
+    var windowType=false;
+    var determineWindowType=function(){
+        if (window.innerWidth>=1200){
+            return "largeDesktop";
+        } else if (window.innerWidth>=992){
+            return "desktop";
+        } if (window.innerWidth>=768){
+            return "tablet";
+        } else {
+            return "phone";
+        }
+    };
+    if (window.innerWidth){
+        windowType=determineWindowType();
+        $(window).resize(function(){
+            windowType=determineWindowType();
+        });
+    }
 
     //generic block directive
     module.directive("rubedoBlock",function(){
@@ -334,6 +352,7 @@
                 var me=this;
                 $scope.blockConfig=$scope.block.configBloc;
                 me.minBlockHeight=$scope.block.configBloc.blockMinHeight;
+                me.responsiveSettings=$scope.block.responsive ? $scope.block.responsive : {};
                 me.isInView=false;
                 $scope.getBlockMinHeight=function(){
                     return(me.minBlockHeight);
@@ -342,8 +361,7 @@
                     me.isInView=true;
                 };
                 $scope.canDisplayBlock=function(){
-                    var respOk=true;
-                    return (isACrawler||((!$scope.rubedo.current.site.optimizedRender||me.isInView)&&respOk));
+                    return (isACrawler||((!$scope.rubedo.current.site.optimizedRender||me.isInView)&&(!windowType||me.responsiveSettings[windowType]!==false)));
                 };
             }]
         };
