@@ -361,7 +361,7 @@
                     me.isInView=true;
                 };
                 $scope.canDisplayBlock=function(){
-                    return (isACrawler||((!$scope.rubedo.current.site.optimizedRender||me.isInView)&&(!windowType||me.responsiveSettings[windowType]!==false)));
+                    return (isACrawler||((!$scope.rubedo.current.site.optimizedRender||$scope.blockConfig.bypassOptimizer||me.isInView)&&(!windowType||me.responsiveSettings[windowType]!==false)));
                 };
             }]
         };
