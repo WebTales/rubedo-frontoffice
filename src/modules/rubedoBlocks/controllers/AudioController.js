@@ -12,7 +12,7 @@ angular.module("rubedoBlocks").lazy.controller("AudioController",["$scope","Rube
                 repeat:config.audioLoop,
                 file:me.media.url
             };
-            setTimeout(function(){jwplayer("audio"+me.media.originalFileId).setup(me.jwSettings);}, 200);
+            setTimeout(function(){jwplayer("audio"+me.media.originalFileId).setup(me.jwSettings); $scope.clearORPlaceholderHeight();}, 200);
         }
     };
     if (mediaId){

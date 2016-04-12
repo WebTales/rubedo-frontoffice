@@ -33,4 +33,5 @@ angular.module("rubedoBlocks").lazy.controller('MailingListUnsuscribeController'
             };
         }
     }
+    $scope.clearORPlaceholderHeight();
 }]);

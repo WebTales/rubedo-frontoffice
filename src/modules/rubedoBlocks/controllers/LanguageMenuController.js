@@ -67,4 +67,5 @@ angular.module("rubedoBlocks").lazy.controller("LanguageMenuController", ['$scop
                 });
             }
         };
+        $scope.clearORPlaceholderHeight();
     }]);

@@ -30,6 +30,7 @@ angular.module("rubedoBlocks").lazy.controller('AddThisShareController',['$scope
             url: window.location.href,
             title: $scope.rubedo.current.page.title
         });
+        $scope.clearORPlaceholderHeight();
 
     };
 }]);

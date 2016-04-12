@@ -24,6 +24,7 @@ angular.module("rubedoBlocks").lazy.controller('GalleryController',['$scope','Ru
                 if(response.data.success){
                     me.count = response.data.count;
                     me.images = response.data.media.data;
+                    $scope.clearORPlaceholderHeight();
                 }
             });
         };

@@ -130,6 +130,7 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
                             me.parseUserType(response.data.userType);
                             me.useSameAddressForBilling=true;
                             me.useSameAddressForShipping=true;
+                            $scope.clearORPlaceholderHeight();
                         }
                     }
                 );
@@ -152,6 +153,7 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
                         $scope.fieldEntity=existingData;
                         me.parseUserType(me.currentUser.type);
                         me.setCurrentStage(2);
+                        $scope.clearORPlaceholderHeight();
                     }
                 }
             );

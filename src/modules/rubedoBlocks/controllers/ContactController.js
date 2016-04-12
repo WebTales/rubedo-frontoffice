@@ -20,6 +20,7 @@ angular.module("rubedoBlocks").lazy.controller('ContactController',['$scope','Ru
                                     me.mailingLists.push(newMailing);
                                 }
                             });
+                            $scope.clearORPlaceholderHeight();
                         });
                     }
                 });
@@ -27,6 +28,7 @@ angular.module("rubedoBlocks").lazy.controller('ContactController',['$scope','Ru
             }
         } else {
             me.mailingListId=config.mailingListId;
+            $scope.clearORPlaceholderHeight();
         }
     }
 

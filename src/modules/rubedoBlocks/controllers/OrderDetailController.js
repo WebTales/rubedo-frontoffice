@@ -32,6 +32,7 @@ angular.module("rubedoBlocks").lazy.controller('OrderDetailController',['$scope'
                             }
                         );
                     }
+                    $scope.clearORPlaceholderHeight();
                 }
             }
         );

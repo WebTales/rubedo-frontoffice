@@ -12,6 +12,7 @@ angular.module("rubedoBlocks").lazy.controller('UserOrdersController',['$scope',
                 if (response.data.orderDetailPageUrl){
                     me.orderDetailPageUrl=response.data.orderDetailPageUrl;
                 }
+                $scope.clearORPlaceholderHeight();
             }
         }
     );

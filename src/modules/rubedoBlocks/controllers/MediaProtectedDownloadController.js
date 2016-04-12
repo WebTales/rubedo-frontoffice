@@ -9,6 +9,7 @@ angular.module("rubedoBlocks").lazy.controller('MediaProtectedDownloadController
         if(response.data.success){
             me.media = response.data.media;
             me.introduction = response.data.introduction?response.data.introduction : undefined;
+            $scope.clearORPlaceholderHeight();
         }
     });
 

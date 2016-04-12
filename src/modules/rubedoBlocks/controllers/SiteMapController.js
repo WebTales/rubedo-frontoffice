@@ -38,8 +38,10 @@ angular.module("rubedoBlocks").lazy.controller("SiteMapController",['$scope','$l
                     // calculate for all pages with children if they have to display them
                     calculatePagesDiplay($scope.menu.pages, 1);
                 }
+                $scope.clearORPlaceholderHeight();
             } else {
                 $scope.menu=[];
+                $scope.clearORPlaceholderHeight();
             }
         });
 

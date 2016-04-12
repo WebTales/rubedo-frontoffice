@@ -11,6 +11,7 @@ angular.module("rubedoBlocks").lazy.controller("RSSFeedController",['$scope','$h
                         entry.publishedDate=new Date(entry.publishedDate);
                     }
                 });
+                $scope.clearORPlaceholderHeight();
             }
         );
     }

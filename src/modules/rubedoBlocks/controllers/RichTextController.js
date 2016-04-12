@@ -11,6 +11,7 @@ angular.module("rubedoBlocks").lazy.controller("RichTextController",["$scope","$
             me.content = config.content;
             $scope.fieldEntity=angular.copy(me.content.fields);
             $scope.fieldLanguage=me.content.locale;
+            $scope.clearORPlaceholderHeight();
         } else {
             var options = {
                 siteId: $scope.rubedo.current.site.id,
@@ -22,6 +23,7 @@ angular.module("rubedoBlocks").lazy.controller("RichTextController",["$scope","$
                         me.content=response.data.content;
                         $scope.fieldEntity=angular.copy(me.content.fields);
                         $scope.fieldLanguage=me.content.locale;
+                        $scope.clearORPlaceholderHeight();
                     }
                 }
             )

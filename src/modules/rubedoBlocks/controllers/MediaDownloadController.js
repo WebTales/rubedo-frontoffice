@@ -12,6 +12,7 @@ angular.module("rubedoBlocks").lazy.controller('MediaDownloadController',['$scop
             if(typeof response.data.intro != "undefined") {
                 me.intro = response.data.intro.content;
             }
+            $scope.clearORPlaceholderHeight();
         }
     });
 }]);

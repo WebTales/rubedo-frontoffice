@@ -81,9 +81,11 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
                 } else {
                     me.emailConfirmError=response.data.message;
                 }
+                $scope.clearORPlaceholderHeight();
             },
             function(response){
                 me.emailConfirmError=response.data.message;
+                $scope.clearORPlaceholderHeight();
             }
         );
     } else if (config.userType){
@@ -131,6 +133,7 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
                         }
                     });
                     me.inputFields=me.userType.fields;
+                    $scope.clearORPlaceholderHeight();
                 }
             }
         );

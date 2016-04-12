@@ -404,9 +404,9 @@
                 $scope.blockEnterFOV=function(){
                     me.isInView=true;
                 };
-                $scope.clearPlaceholderHeight=function(){
+                $scope.clearORPlaceholderHeight=function(){
                     if(me.minHeightIsArtificial){
-                         setTimeout(function(){ delete(me.minBlockHeight);me.minHeightIsArtificial=false; }, 700);
+                         setTimeout(function(){ delete(me.minBlockHeight);me.minHeightIsArtificial=false; }, 100);
                     }
                 };
                 $scope.canDisplayBlock=function(){

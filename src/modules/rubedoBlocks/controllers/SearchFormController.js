@@ -11,4 +11,5 @@ angular.module("rubedoBlocks").lazy.controller("SearchFormController",['$scope',
             }
         });
     };
+    $scope.clearORPlaceholderHeight();
 }]);
