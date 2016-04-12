@@ -370,7 +370,7 @@
                 return blockConfig.summaryHeight&&blockConfig.columns&&blockConfig.pageSize ? Math.round(blockConfig.pageSize/blockConfig.columns)*(blockConfig.summaryHeight+50) : 300;
                 break;
             case "geoSearchResults":
-                return blockConfig.height ? blockConfig.height : 500;
+                return blockConfig.height ? blockConfig.height : 600;
                 break;
             default:
                 return defaultMinHeight;
