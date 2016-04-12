@@ -29,6 +29,7 @@ angular.module("rubedoBlocks").lazy.controller("ShoppingCartController",["$scope
                         me.cartIsEmpty=true;
                         me.detailedCart={};
                     }
+                    $scope.clearORPlaceholderHeight();
                 }
             }
         );

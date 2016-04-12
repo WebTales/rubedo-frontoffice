@@ -20,7 +20,7 @@ angular.module("rubedoBlocks").lazy.controller("VideoController",["$scope","Rube
             if (config.videoPoster){
                 me.jwSettings.image=RubedoImageUrlService.getUrlByMediaId(config.videoPoster,{});
             }
-            setTimeout(function(){jwplayer("video"+me.media.originalFileId).setup(me.jwSettings);}, 200);
+            setTimeout(function(){jwplayer("video"+me.media.originalFileId).setup(me.jwSettings); $scope.clearORPlaceholderHeight(); }, 200);
         }
     };
     if (mediaId){

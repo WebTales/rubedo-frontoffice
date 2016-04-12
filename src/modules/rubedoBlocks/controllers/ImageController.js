@@ -16,6 +16,7 @@ angular.module("rubedoBlocks").lazy.controller("ImageController",["$scope","$htt
         function(response) {
             if(response.data.success) {
                 me.imageTitle = response.data.media.fields.title;
+                $scope.clearORPlaceholderHeight();
             }
         }
     );

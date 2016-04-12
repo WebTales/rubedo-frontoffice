@@ -48,8 +48,10 @@
 	                	});
                 	}
                 });
+                $scope.clearORPlaceholderHeight();
             } else {
                 me.menu={};
+                $scope.clearORPlaceholderHeight();
             }
         });        
         

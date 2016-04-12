@@ -61,6 +61,7 @@ angular.module("rubedoBlocks").lazy.controller("CalendarController",["$scope","$
                         me.calendar.fullCalendar('removeEvents');
                         me.calendar.fullCalendar('addEventSource', newEvents);
                         me.calendar.fullCalendar('refetchEvents');
+                        $scope.clearORPlaceholderHeight();
                     });
                 }
             }

@@ -64,6 +64,7 @@ angular.module("rubedoBlocks").lazy.controller("UserProfileController",["$scope"
                     } else {
                         me.detailTemplate=themePath+'/templates/blocks/userDetail/default.html'
                     }
+                    $scope.clearORPlaceholderHeight();
                 }
             }
         );

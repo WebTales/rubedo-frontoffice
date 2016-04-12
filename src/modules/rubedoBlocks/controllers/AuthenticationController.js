@@ -125,4 +125,5 @@ angular.module("rubedoBlocks").lazy.controller("AuthenticationController",["$sco
         RubedoAuthService.clearPersistedTokens();
         window.location.reload();
     }
+    $scope.clearORPlaceholderHeight();
 }]);

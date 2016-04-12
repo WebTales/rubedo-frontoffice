@@ -208,6 +208,7 @@ angular.module("rubedoBlocks").lazy.controller('DirectoryController',["$scope","
                             });
                         }
                     });
+                    $scope.clearORPlaceholderHeight();
                 }
             })
         };

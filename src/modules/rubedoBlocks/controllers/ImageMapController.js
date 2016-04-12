@@ -5,6 +5,7 @@ angular.module("rubedoBlocks").lazy.controller('ImageMapController',['$scope','$
         RubedoMediaService.getMediaById(config.image).then(function(response){
             if(response.data.success){
                 me.image =  response.data.media;
+                $scope.clearORPlaceholderHeight();
             }
         });
         me.prefix = config.image+'map';

@@ -44,6 +44,7 @@ angular.module("rubedoBlocks").lazy.controller('TwitterController',['$scope',fun
             fjs.parentNode.insertBefore(js, fjs);
             return window.twttr || (t = { _e: [], ready: function (f) { t._e.push(f) } });
         }(document, "script", "twitter-wjs"));
+        $scope.clearORPlaceholderHeight();
     };
     me.loadTwitter();
 }]);

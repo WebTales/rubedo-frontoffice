@@ -2,7 +2,7 @@
  * Module that manages blocks
  */
 (function(){
-    var defaultModules = ['rubedoDataAccess', 'lrInfiniteScroll','rubedoFields','snap','mgcrea.ngStrap'];
+    var defaultModules = ['rubedoDataAccess', 'lrInfiniteScroll','rubedoFields','snap','mgcrea.ngStrap','angular-inview'];
     var modulesArray = window.rubedoConfig.extensionAngularModules?defaultModules.concat(window.rubedoConfig.extensionAngularModules):defaultModules;
     var module = angular.module('rubedoBlocks',modulesArray);
 
@@ -320,11 +320,99 @@
         return serviceInstance;
     });
 
+    var isACrawler=false;
+    if(navigator.userAgent&&(navigator.userAgent.indexOf("PhantomJS")>-1||navigator.userAgent.indexOf("Prerender")>-1)){
+        isACrawler=true;
+    }
+    var windowType=false;
+    var determineWindowType=function(){
+        if (window.innerWidth>=1200){
+            return "largeDesktop";
+        } else if (window.innerWidth>=992){
+            return "desktop";
+        } if (window.innerWidth>=768){
+            return "tablet";
+        } else {
+            return "phone";
+        }
+    };
+    if (window.innerWidth){
+        windowType=determineWindowType();
+        $(window).resize(function(){
+            windowType=determineWindowType();
+        });
+    }
+    var defaultMinHeight=100;
+    var determineGenericBlockHeight=function(blockType,blockConfig){
+        switch(blockType) {
+            case "image":
+            case "carrousel":
+                return blockConfig.imageHeight ? blockConfig.imageHeight : defaultMinHeight;
+                break;
+            case "video":
+                return blockConfig.videoHeight ? blockConfig.videoHeight : defaultMinHeight;
+                break;
+            case "imageGallery":
+                return blockConfig.imageThumbnailHeight ? blockConfig.imageThumbnailHeight : defaultMinHeight;
+                break;
+            case "externalMedia":
+                return blockConfig.maxHeight ? blockConfig.maxHeight : defaultMinHeight;
+                break;
+            case "searchResults":
+            case "productSearch":
+            case "directory":
+            case "contentContribution":
+            case "signUp":
+            case "orderDetail":
+            case "checkout":
+                return 500;
+                break;
+            case "contentList":
+            case "productList":
+                return blockConfig.summaryHeight&&blockConfig.columns&&blockConfig.pageSize ? Math.round(blockConfig.pageSize/blockConfig.columns)*(blockConfig.summaryHeight+50) : 300;
+                break;
+            case "geoSearchResults":
+                return blockConfig.height ? blockConfig.height : 600;
+                break;
+            default:
+                return defaultMinHeight;
+        }
+    };
+
     //generic block directive
     module.directive("rubedoBlock",function(){
         return {
             restrict:"E",
-            templateUrl:themePath+"/templates/rubedoBlock.html"
+            templateUrl:themePath+"/templates/rubedoBlock.html",
+            controller: ['$scope', function($scope) {
+                var me=this;
+                $scope.blockConfig=$scope.block.configBloc;
+                me.minBlockHeight=$scope.block.configBloc.blockMinHeight;
+                me.responsiveSettings=$scope.block.responsive ? $scope.block.responsive : {};
+                if (!me.minBlockHeight&&!isACrawler&&$scope.rubedo.current.site.optimizedRender&&(!windowType||me.responsiveSettings[windowType]!==false)){
+                    if ($scope.blockConfig.orPlaceholderMinHeight){
+                        me.minBlockHeight=$scope.blockConfig.orPlaceholderMinHeight;
+                    } else {
+                        me.minBlockHeight=determineGenericBlockHeight($scope.block.bType,$scope.blockConfig);
+                    }
+                    me.minHeightIsArtificial=true;
+                }
+                me.isInView=false;
+                $scope.getBlockMinHeight=function(){
+                    return(me.minBlockHeight);
+                };
+                $scope.blockEnterFOV=function(){
+                    me.isInView=true;
+                };
+                $scope.clearORPlaceholderHeight=function(){
+                    if(me.minHeightIsArtificial){
+                         setTimeout(function(){ delete(me.minBlockHeight);me.minHeightIsArtificial=false; }, 100);
+                    }
+                };
+                $scope.canDisplayBlock=function(){
+                    return (isACrawler||((!$scope.rubedo.current.site.optimizedRender||$scope.blockConfig.bypassOptimizer||me.isInView)&&(!windowType||me.responsiveSettings[windowType]!==false)));
+                };
+            }]
         };
     });
 

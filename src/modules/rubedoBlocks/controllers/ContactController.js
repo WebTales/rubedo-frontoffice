@@ -20,13 +20,18 @@ angular.module("rubedoBlocks").lazy.controller('ContactController',['$scope','Ru
                                     me.mailingLists.push(newMailing);
                                 }
                             });
+
                         });
                     }
+                    $scope.clearORPlaceholderHeight();
                 });
 
+            } else {
+                $scope.clearORPlaceholderHeight();
             }
         } else {
             me.mailingListId=config.mailingListId;
+            $scope.clearORPlaceholderHeight();
         }
     }
 

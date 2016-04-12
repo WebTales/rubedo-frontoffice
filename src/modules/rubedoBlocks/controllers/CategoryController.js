@@ -27,8 +27,10 @@
         RubedoMenuService.getMenu(pageId, me.menuLevel).then(function(response){
             if (response.data.success){
                 me.menu=response.data.menu;
+                $scope.clearORPlaceholderHeight();
             } else {
                 me.menu={};
+                $scope.clearORPlaceholderHeight();
             }
         });
     }]);

@@ -24,6 +24,7 @@ angular.module("rubedoBlocks").lazy.controller('MailingListSuscribeController',[
                     }
                 });
             });
+            $scope.clearORPlaceholderHeight();
         }
     });
     me.submit = function(){
