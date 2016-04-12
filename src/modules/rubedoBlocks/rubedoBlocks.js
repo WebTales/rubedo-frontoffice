@@ -363,6 +363,8 @@
             case "directory":
             case "contentContribution":
             case "signUp":
+            case "orderDetail":
+            case "checkout":
                 return 500;
                 break;
             case "contentList":
