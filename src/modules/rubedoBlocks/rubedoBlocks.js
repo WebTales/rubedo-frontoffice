@@ -386,11 +386,15 @@
                 var me=this;
                 $scope.blockConfig=$scope.block.configBloc;
                 me.minBlockHeight=$scope.block.configBloc.blockMinHeight;
-                if (!me.minBlockHeight&&!isACrawler&&$scope.rubedo.current.site.optimizedRender){
-                    me.minBlockHeight=determineGenericBlockHeight($scope.block.bType,$scope.blockConfig);
+                me.responsiveSettings=$scope.block.responsive ? $scope.block.responsive : {};
+                if (!me.minBlockHeight&&!isACrawler&&$scope.rubedo.current.site.optimizedRender&&(!windowType||me.responsiveSettings[windowType]!==false)){
+                    if ($scope.blockConfig.orPlaceholderMinHeight){
+                        me.minBlockHeight=$scope.blockConfig.orPlaceholderMinHeight;
+                    } else {
+                        me.minBlockHeight=determineGenericBlockHeight($scope.block.bType,$scope.blockConfig);
+                    }
                     me.minHeightIsArtificial=true;
                 }
-                me.responsiveSettings=$scope.block.responsive ? $scope.block.responsive : {};
                 me.isInView=false;
                 $scope.getBlockMinHeight=function(){
                     return(me.minBlockHeight);
