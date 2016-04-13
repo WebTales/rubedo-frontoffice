@@ -100,20 +100,46 @@
     }]);
 
     //service providing menu structure using root page id, level and language
-    module.factory('RubedoMenuService', ['$route','$http',function($route,$http) {
+    module.factory('RubedoMenuService', ['$route','$http','$q',function($route,$http,$q) {
         var serviceInstance={};
-        serviceInstance.getMenu=function(pageId,menuLevel,includeRichText){
-            var params={
-                pageId:pageId,
-                menuLocale:$route.current.params.lang,
-                menuLevel:menuLevel
-            };
-            if (includeRichText){
-                params.includeRichText=true;
+        serviceInstance.buildMenu=function(nodeId,level){
+            var currentNode=angular.copy(StoredSitePages[nodeId]);
+            if (level>0){
+                angular.forEach(StoredSitePages,function(potentialChild){
+                    if (!potentialChild.excludeFromMenu&&potentialChild.parentId==nodeId){
+                        if (!currentNode.pages){
+                            currentNode.pages=[];
+                        }
+                        currentNode.pages.push(serviceInstance.buildMenu(potentialChild.id,level-1));
+                    }
+                });
             }
-            return ($http.get(config.baseUrl+"/menu",{
-                params:params
-            }));
+            return currentNode;
+        };
+        serviceInstance.getMenu=function(pageId,menuLevel,includeRichText){
+            if(StoredSitePages[pageId]){
+                var simulatedReturn={
+                    data:{
+                        success:true,
+                        menu:serviceInstance.buildMenu(pageId,menuLevel)
+                    }
+                };
+                var deferred = $q.defer();
+                deferred.resolve(simulatedReturn);
+                return deferred.promise;
+            } else {
+                var params = {
+                    pageId: pageId,
+                    menuLocale: $route.current.params.lang,
+                    menuLevel: menuLevel
+                };
+                if (includeRichText) {
+                    params.includeRichText = true;
+                }
+                return ($http.get(config.baseUrl + "/menu", {
+                    params: params
+                }));
+            }
         };
         return serviceInstance;
     }]);
