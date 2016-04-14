@@ -101,7 +101,7 @@ angular.module("rubedoBlocks").lazy.controller("AuthenticationController",["$sco
             RubedoAuthService.generateToken(me.credentials,me.rememberMe).then(
                 function(responseAuth){
                     if (me.blockConfig&&me.blockConfig.redirectOnConnection&&me.blockConfig.profilePage&&mongoIdRegex.test(me.blockConfig.profilePage)){
-                        RubedoPagesService.getPageById(me.blockConfig.profilePage).then(function(response){
+                        RubedoPagesService.getPageById(me.blockConfig.profilePage,true).then(function(response){
                             if (response.data.success){
                                 window.location.href=response.data.url;
                             } else {
