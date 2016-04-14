@@ -79,8 +79,8 @@
                 }
             }));
         };
-        serviceInstance.getPageById=function(pageId){
-            if(StoredSitePages[pageId]&&StoredSitePages[pageId].url){
+        serviceInstance.getPageById=function(pageId,forceLoad){
+            if(StoredSitePages[pageId]&&StoredSitePages[pageId].url&&!forceLoad){
                 var simulatedReturn={
                     data:{
                         success:true,
