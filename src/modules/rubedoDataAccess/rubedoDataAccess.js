@@ -10,7 +10,7 @@
         fingerPrintData:{}
     };
 
-
+    var StoredSitePages={};
     var Base64={_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){var t="";var n,r,i,s,o,u,a;var f=0;e=Base64._utf8_encode(e);while(f<e.length){n=e.charCodeAt(f++);r=e.charCodeAt(f++);i=e.charCodeAt(f++);s=n>>2;o=(n&3)<<4|r>>4;u=(r&15)<<2|i>>6;a=i&63;if(isNaN(r)){u=a=64}else if(isNaN(i)){a=64}t=t+this._keyStr.charAt(s)+this._keyStr.charAt(o)+this._keyStr.charAt(u)+this._keyStr.charAt(a)}return t},decode:function(e){var t="";var n,r,i;var s,o,u,a;var f=0;e=e.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(f<e.length){s=this._keyStr.indexOf(e.charAt(f++));o=this._keyStr.indexOf(e.charAt(f++));u=this._keyStr.indexOf(e.charAt(f++));a=this._keyStr.indexOf(e.charAt(f++));n=s<<2|o>>4;r=(o&15)<<4|u>>2;i=(u&3)<<6|a;t=t+String.fromCharCode(n);if(u!=64){t=t+String.fromCharCode(r)}if(a!=64){t=t+String.fromCharCode(i)}}t=Base64._utf8_decode(t);return t},_utf8_encode:function(e){e=e.replace(/\r\n/g,"\n");var t="";for(var n=0;n<e.length;n++){var r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r)}else if(r>127&&r<2048){t+=String.fromCharCode(r>>6|192);t+=String.fromCharCode(r&63|128)}else{t+=String.fromCharCode(r>>12|224);t+=String.fromCharCode(r>>6&63|128);t+=String.fromCharCode(r&63|128)}}return t},_utf8_decode:function(e){var t="";var n=0;var r=c1=c2=0;while(n<e.length){r=e.charCodeAt(n);if(r<128){t+=String.fromCharCode(r);n++}else if(r>191&&r<224){c2=e.charCodeAt(n+1);t+=String.fromCharCode((r&31)<<6|c2&63);n+=2}else{c2=e.charCodeAt(n+1);c3=e.charCodeAt(n+2);t+=String.fromCharCode((r&15)<<12|(c2&63)<<6|c3&63);n+=3}}return t}};
 
 //add params to all requests
@@ -68,7 +68,7 @@
     }]);
 
     //service providing page json from current route
-    module.factory('RubedoPagesService', ['$location','$route','$http',function($location,$route,$http) {
+    module.factory('RubedoPagesService', ['$location','$route','$http','$q',function($location,$route,$http,$q) {
         var serviceInstance={};
         serviceInstance.getPageByCurrentRoute=function(){
             config.lang = $route.current.params.lang;
@@ -79,27 +79,67 @@
                 }
             }));
         };
-        serviceInstance.getPageById=function(pageId){
-            return ($http.get(config.baseUrl+"/pages/"+pageId));
+        serviceInstance.getPageById=function(pageId,forceLoad){
+            if(StoredSitePages[pageId]&&StoredSitePages[pageId].url&&!forceLoad){
+                var simulatedReturn={
+                    data:{
+                        success:true,
+                        title:StoredSitePages[pageId].title,
+                        url:StoredSitePages[pageId].url,
+                        pageData:StoredSitePages[pageId]
+                    }
+                };
+                var deferred = $q.defer();
+                deferred.resolve(simulatedReturn);
+                return deferred.promise;
+            } else {
+                return ($http.get(config.baseUrl+"/pages/"+pageId));
+            }
         };
         return serviceInstance;
     }]);
 
     //service providing menu structure using root page id, level and language
-    module.factory('RubedoMenuService', ['$route','$http',function($route,$http) {
+    module.factory('RubedoMenuService', ['$route','$http','$q',function($route,$http,$q) {
         var serviceInstance={};
-        serviceInstance.getMenu=function(pageId,menuLevel,includeRichText){
-            var params={
-                pageId:pageId,
-                menuLocale:$route.current.params.lang,
-                menuLevel:menuLevel
-            };
-            if (includeRichText){
-                params.includeRichText=true;
+        serviceInstance.buildMenu=function(nodeId,level){
+            var currentNode=angular.copy(StoredSitePages[nodeId]);
+            if (level>0){
+                angular.forEach(StoredSitePages,function(potentialChild){
+                    if (!potentialChild.excludeFromMenu&&potentialChild.parentId==nodeId){
+                        if (!currentNode.pages){
+                            currentNode.pages=[];
+                        }
+                        currentNode.pages.push(serviceInstance.buildMenu(potentialChild.id,level-1));
+                    }
+                });
             }
-            return ($http.get(config.baseUrl+"/menu",{
-                params:params
-            }));
+            return currentNode;
+        };
+        serviceInstance.getMenu=function(pageId,menuLevel,includeRichText){
+            if(StoredSitePages[pageId]){
+                var simulatedReturn={
+                    data:{
+                        success:true,
+                        menu:serviceInstance.buildMenu(pageId,menuLevel)
+                    }
+                };
+                var deferred = $q.defer();
+                deferred.resolve(simulatedReturn);
+                return deferred.promise;
+            } else {
+                var params = {
+                    pageId: pageId,
+                    menuLocale: $route.current.params.lang,
+                    menuLevel: menuLevel
+                };
+                if (includeRichText) {
+                    params.includeRichText = true;
+                }
+                return ($http.get(config.baseUrl + "/menu", {
+                    params: params
+                }));
+            }
         };
         return serviceInstance;
     }]);
@@ -726,9 +766,8 @@
 
         return serviceInstance;
     }]);
-
+    var injector = angular.injector(['rubedoDataAccess', 'ng']);
     if (typeof(Fingerprint2)!="undefined"){
-        var injector = angular.injector(['rubedoDataAccess', 'ng']);
         var ipc=injector.get("ipCookie");
         var fpd=injector.get("RubedoFingerprintDataService");
 
@@ -745,5 +784,20 @@
             });
         }
     }
+
+
+    var myHttpServ=injector.get("$http");
+    var pathsplit=window.location.pathname.split("/");
+    myHttpServ.get(config.baseUrl+"/sitestructure",{
+        params:{
+            site:window.location.host,
+            lang:pathsplit[1]
+        }
+    }).then(function(response){
+        if(response.data.success){
+            StoredSitePages=response.data.pages;
+        }
+    });
+
 
 })();
