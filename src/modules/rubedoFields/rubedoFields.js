@@ -23,7 +23,7 @@
     });
 
     var themePath="/theme/"+window.rubedoConfig.siteTheme;
-    
+
     fieldsConfig={
         "textarea":"/templates/fields/textarea.html",
         "textareafield":"/templates/fields/textarea.html",
@@ -817,12 +817,11 @@
             }
             var complement;
             if (me.currentVariation.stock < me.productProperties.outOfStockLimit){
-                complement=me.productProperties.resupplyDelay > 1 ? " days" : " day";
-                return("Out of stock : ressuplied before "+me.productProperties.resupplyDelay+ complement);
-
+                complement=me.productProperties.resupplyDelay > 1 ? $scope.rubedo.translate("Label.days", "days") : $scope.rubedo.translate("Label.day", "day");
+                return($scope.rubedo.translate("Fields.User.Label.OutOfStock", "Out of stock") + " : " + $scope.rubedo.translate("Fields.User.Label.RessupliedBefore", "ressuplied before") + " " + me.productProperties.resupplyDelay + " " + complement);
             } else {
-                complement=me.productProperties.preparationDelay > 1 ? " days" : " day";
-                return("In stock : sent before "+me.productProperties.preparationDelay + complement);
+                complement=me.productProperties.preparationDelay > 1 ? $scope.rubedo.translate("Label.days", "days") : $scope.rubedo.translate("Label.day", "day");
+                return($scope.rubedo.translate("Fields.User.Label.InStock", "In stock") + " : " + $scope.rubedo.translate("Fields.User.Label.SentBefore", "sent before") + " " + me.productProperties.preparationDelay + " " + complement);
             }
         };
         me.addToCart=function(){
