@@ -386,12 +386,12 @@
 
         $scope.$on("ClickStreamEvent",function(event,args){
             if (typeof(Fingerprint2)!="undefined"&&args&&args.csEvent){
-                RubedoClickStreamService.logEvent(args.csEvent,args.csEventId,args.csEventArgs);
+                RubedoClickStreamService.logEvent(args.csEvent,args.csEventId,args.csEventArgs,args.csEventLabel);
             }
         });
 
-        me.fireCSEvent=function(event,csEventId,args){
-            $rootScope.$broadcast("ClickStreamEvent",{csEvent:event,csEventId:csEventId,csEventArgs:args});
+        me.fireCSEvent=function(event,csEventId,args,label){
+            $rootScope.$broadcast("ClickStreamEvent",{csEvent:event,csEventId:csEventId,csEventArgs:args,csEventLabel:label});
         };
 
         USER=UXUserService;
@@ -523,7 +523,7 @@
                     pageId:newPage.id,
                     siteId:response.data.site.id,
                     taxonomyTerms:allContentTerms
-                }});
+                },csEventLabel:newPage.text});
 
             }
         },function(response){

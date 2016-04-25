@@ -679,7 +679,7 @@
 
     module.factory('RubedoClickStreamService',['$http','ipCookie',function($http,ipCookie){
         var serviceInstance = {};
-        serviceInstance.logEvent=function(event,eventId,args){
+        serviceInstance.logEvent=function(event,eventId,args,label){
             if (config.fingerprint) {
                 var currentSessionId=ipCookie("sessionId");
                 if (!currentSessionId){
@@ -696,7 +696,8 @@
                     sessionId:currentSessionId,
                     event:event,
                     eventId:eventId,
-                    eventArgs:args
+                    eventArgs:args,
+                    eventLabel:label
                 };
                 return ($http({
                     url: config.baseUrl + "/clickstream",

@@ -120,7 +120,7 @@ angular.module("rubedoBlocks").lazy.controller("ContentDetailController",["$scop
                         pageId:options.siteId,
                         typeId:me.content.typeId,
                         taxonomyTerms:allContentTerms
-                    }});
+                    },csEventLabel:me.content.fields.text});
                 }
             }
         );
