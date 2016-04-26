@@ -694,6 +694,7 @@
                     os:navigator.platform,
                     userAgent:navigator.userAgent,
                     sessionId:currentSessionId,
+                    referrer:document.referrer,
                     event:event,
                     eventId:eventId,
                     eventArgs:args,
