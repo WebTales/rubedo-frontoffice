@@ -102,6 +102,14 @@
     //service providing menu structure using root page id, level and language
     module.factory('RubedoMenuService', ['$route','$http','$q',function($route,$http,$q) {
         var serviceInstance={};
+        serviceInstance.sortHelper=function(a,b) {
+            if (a.orderValue < b.orderValue)
+                return -1;
+            else if (a.orderValue > b.orderValue)
+                return 1;
+            else
+                return 0;
+        };
         serviceInstance.buildMenu=function(nodeId,level){
             var currentNode=angular.copy(StoredSitePages[nodeId]);
             if (level>0){
@@ -113,6 +121,9 @@
                         currentNode.pages.push(serviceInstance.buildMenu(potentialChild.id,level-1));
                     }
                 });
+            }
+            if (currentNode.pages) {
+                currentNode.pages.sort(serviceInstance.sortHelper);
             }
             return currentNode;
         };
