@@ -545,8 +545,5 @@
             templateUrl:themePath+"/templates/notification.html"
         };
     });
-    if(MarkerClusterer) {
-        MarkerClusterer.IMAGE_PATH = "http://raw.githubusercontent.com/googlemaps/js-marker-clusterer/gh-pages/images/m";
-    }
 
 })();
