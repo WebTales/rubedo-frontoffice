@@ -537,7 +537,24 @@
                         }
 
                     });
-                }
+                };
+                $scope.$watch('facet.terms.length', function() {
+                    if(me.calendar){
+                        var newEvents = [];
+                        angular.forEach($scope.facet.terms,function(term){
+                            var event = {
+                                termId:term.term,
+                                start:moment(term.term).format('YYYY-MM-DD'),
+                                end:moment(term.term).format('YYYY-MM-DD'),
+                                title:term.count
+                            };
+                            newEvents.push(event);
+                        });
+                        me.calendar.fullCalendar('removeEvents');
+                        me.calendar.fullCalendar('addEventSource', newEvents);
+                        me.calendar.fullCalendar('refetchEvents');
+                    }
+                });
             }]
         };
     });
