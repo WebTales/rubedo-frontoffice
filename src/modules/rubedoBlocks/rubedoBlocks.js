@@ -517,11 +517,14 @@
                             right:  'next'
                         },
                         height:200,
+                        eventClick: function(calEvent, jsEvent, view) {
+                            $scope.searchResultsCtrl.clickOnFacets($scope.facet.id, calEvent.termId);
+                        },
                         viewRender: function(view){
                             var newEvents = [];
                             angular.forEach($scope.facet.terms,function(term){
-                                console.log(term);
                                 var event = {
+                                    termId:term.term,
                                     start:moment(term.term).format('YYYY-MM-DD'),
                                     end:moment(term.term).format('YYYY-MM-DD'),
                                     title:term.count

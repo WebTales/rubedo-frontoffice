@@ -197,6 +197,7 @@
 }
 .datehistogramfacet  .fc-event-inner {
     text-align: center !important;
+    cursor: pointer;
 }
 @media (max-width: 768px) {
     .dropdown-menu-large {
