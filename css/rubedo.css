@@ -192,6 +192,12 @@
     color: #428bca;
     font-size: 18px;
 }
+.datehistogramfacet .fc h2 {
+    font-size: 18px !important;
+}
+.datehistogramfacet  .fc-event-inner {
+    text-align: center !important;
+}
 @media (max-width: 768px) {
     .dropdown-menu-large {
         margin-left: 0 ;

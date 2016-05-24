@@ -28,7 +28,7 @@
         <div class="panel panel-default" ng-repeat="facet in searchResultsCtrl.facets track by $index" ng-if="facet.terms || facet.ranges">
             <div class="panel-heading">{{facet.label}}&nbsp;<span
                     ng-if="facet.total && (facet.total - facet.other) <= searchResultsCtrl.count" class="badge pull-right">{{facet.total - facet.other}}</span></div>
-            <div class="panel-body">
+            <div class="panel-body" ng-if="facet['_type']!='datehistogram'">
                 <ul>
                     <li ng-if="facet.terms" class="cursor-as-pointer" ng-repeat="term in facet.terms track by $index"
                         ng-click="searchResultsCtrl.clickOnFacets(facet.id, term.term)">
@@ -39,6 +39,8 @@
                         {{term.label}}&nbsp;({{term.count}})
                     </li>
                 </ul>
+            </div>
+            <div class="panel-body" ng-if="facet['_type']=='datehistogram'">
             </div>
         </div>
     </div>

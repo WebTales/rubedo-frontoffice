@@ -85,7 +85,8 @@
         },
         "searchResults": {
             "template": "/templates/blocks/searchResults.html",
-            "internalDependencies":["/src/modules/rubedoBlocks/controllers/SearchResultsController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"]
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/SearchResultsController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"],
+            "externalDependencies":['/components/jquery/fullCalendar/lib/jquery-ui.custom.min.js','/components/jquery/fullCalendar/fullcalendar.min.js','/components/jquery/fullCalendar/lang/en-gb.js','/components/jquery/fullCalendar/lang/fr.js']
         },
         "userProfile": {
             "template": "/templates/blocks/userProfile.html",
@@ -499,5 +500,43 @@
 
     module.filter('unsafe', function($sce) { return $sce.trustAsHtml; });
 
+    module.directive("datehistogramFacet",function(){
+        return {
+            restrict:"E",
+            templateUrl:themePath+"/templates/blocks/facets/datehistogramFacet.html",
+            controller: ['$scope','$element','$route', function($scope,$element,$route) {
+                var me=this;
+                $scope.init = function(){
+                    me.calendar = $element.find(".dhf-holder");
+                    me.calendar.fullCalendar({
+                        lang: $route.current.params.lang,
+                        timezone: false,
+                        header:{
+                            left:   'prev',
+                            center: 'title',
+                            right:  'next'
+                        },
+                        height:200,
+                        viewRender: function(view){
+                            var newEvents = [];
+                            angular.forEach($scope.facet.terms,function(term){
+                                console.log(term);
+                                var event = {
+                                    start:moment(term.term).format('YYYY-MM-DD'),
+                                    end:moment(term.term).format('YYYY-MM-DD'),
+                                    title:term.count
+                                };
+                                newEvents.push(event);
+                            });
+                                me.calendar.fullCalendar('removeEvents');
+                                me.calendar.fullCalendar('addEventSource', newEvents);
+                                me.calendar.fullCalendar('refetchEvents');
+                        }
+
+                    });
+                }
+            }]
+        };
+    });
 
 })();
