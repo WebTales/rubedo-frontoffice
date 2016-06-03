@@ -356,6 +356,7 @@ angular.module("rubedoBlocks").lazy.controller("GeoSearchResultsController",["$s
                                 var newTerm = {};
                                 newTerm.term = term.term;
                                 newTerm.label = term.label;
+                                newTerm["_type"] = term["_type"];
                                 newTerm.facetId = activeFacet.id;
                                 if(previousFacetId == activeFacet.id){
                                     newTerm.operator =' '+(activeFacet.operator)+' ';

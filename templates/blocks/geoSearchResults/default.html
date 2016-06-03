@@ -3,11 +3,11 @@
             <span class="navbar-brand">{{rubedo.translate('Blocks.Search.Label.SearchCriteria', 'Search criteria')}} :
                 <span ng-repeat-start="term in geoSearchResultsCtrl.notRemovableTerms track by $index">{{term.operator}}</span><span
                         class="badge" ng-repeat-end>
-                    {{term.label}}
+                    <span ng-if="term['_type']!='date'">{{term.label}}</span><span ng-if="term['_type']=='date'">{{term.label | date: "shortDate"}}</span>
                 </span><span ng-repeat-start="term in geoSearchResultsCtrl.activeTerms track by $index">{{term.operator}}</span>
                 <span class="badge cursor-as-pointer" ng-repeat-end
                       ng-click="geoSearchResultsCtrl.clickOnFacets(term.facetId, term.term)">
-                    {{term.label}}&nbsp;&times;
+                    <span ng-if="term['_type']!='date'">{{term.label}}</span><span ng-if="term['_type']=='date'">{{term.label | date: "shortDate"}}</span>&nbsp;&times;
                 </span>
             </span>
     </div>
@@ -28,7 +28,7 @@
         <div class="panel panel-default" ng-repeat="facet in geoSearchResultsCtrl.facets track by $index" ng-if="facet.terms || facet.ranges">
             <div class="panel-heading">{{facet.label}}&nbsp;<span
                     ng-if="facet.total && (facet.total - facet.other) <= geoSearchResultsCtrl.count" class="badge pull-right">{{facet.total - facet.other}}</span></div>
-            <div class="panel-body" ng-if="facet['_type']!='datehistogram'">
+            <div class="panel-body" ng-if="facet['_type']!='date'">
                 <ul>
                     <li ng-if="facet.terms" class="cursor-as-pointer" ng-repeat="term in facet.terms track by $index"
                         ng-click="geoSearchResultsCtrl.clickOnFacets(facet.id, term.term)">
@@ -40,7 +40,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="panel-body" ng-if="facet['_type']=='datehistogram'">
+            <div class="panel-body" ng-if="facet['_type']=='date'">
                 <datehistogram-facet></datehistogram-facet>
             </div>
         </div>
