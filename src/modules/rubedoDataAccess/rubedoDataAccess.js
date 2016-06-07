@@ -709,7 +709,7 @@
                     screenWidth:screen.width
                 };
                 if(args){
-                    payload.csEventArgs=args;
+                    payload.eventArgs=args;
                 }
                 return ($http({
                     url: config.baseUrl + "/clickstream",
