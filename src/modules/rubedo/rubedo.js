@@ -386,13 +386,16 @@
 
         $scope.$on("ClickStreamEvent",function(event,args){
             if (typeof(Fingerprint2)!="undefined"&&args&&args.csEvent){
-                RubedoClickStreamService.logEvent(args.csEvent,args.csEventId,args.csEventArgs,args.csEventLabel);
+                RubedoClickStreamService.logEvent(args.csEvent,args.csEventArgs);
             }
         });
 
-        me.fireCSEvent=function(event,csEventId,args,label){
-            $rootScope.$broadcast("ClickStreamEvent",{csEvent:event,csEventId:csEventId,csEventArgs:args,csEventLabel:label});
+        me.fireCSEvent=function(event,args){
+            $rootScope.$broadcast("ClickStreamEvent",{csEvent:event,csEventArgs:args});
         };
+        //temporary test
+        window.fireCSEvent=me.fireCSEvent;
+        //end temporary test
 
         USER=UXUserService;
         $scope.USER=USER;
@@ -519,11 +522,7 @@
                         }
                     });
                 }
-                $rootScope.$broadcast("ClickStreamEvent",{csEvent:"pageView",csEventId:newPage.id,csEventArgs:{
-                    pageId:newPage.id,
-                    siteId:response.data.site.id,
-                    taxonomyTerms:allContentTerms
-                },csEventLabel:newPage.text});
+                //$rootScope.$broadcast("ClickStreamEvent",{csEvent:"pageView"});
 
             }
         },function(response){

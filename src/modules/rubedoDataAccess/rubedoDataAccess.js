@@ -690,7 +690,7 @@
 
     module.factory('RubedoClickStreamService',['$http','ipCookie',function($http,ipCookie){
         var serviceInstance = {};
-        serviceInstance.logEvent=function(event,eventId,args,label){
+        serviceInstance.logEvent=function(event,args){
             if (config.fingerprint) {
                 var currentSessionId=ipCookie("sessionId");
                 if (!currentSessionId){
@@ -701,16 +701,16 @@
                 ipCookie("sessionId",currentSessionId,{path:"/",expires:5, expirationUnit:"minutes"});
                 var payload = {
                     fingerprint:config.fingerprint,
-                    url:window.location.href,
-                    os:navigator.platform,
-                    userAgent:navigator.userAgent,
                     sessionId:currentSessionId,
-                    referrer:document.referrer,
                     event:event,
-                    eventId:eventId,
-                    eventArgs:args,
-                    eventLabel:label
+                    referrer:document.referrer,
+                    referringDomain:document.referrer.split('/')[2],
+                    screenHeight:screen.height,
+                    screenWidth:screen.width
                 };
+                if(args){
+                    payload.csEventArgs=args;
+                }
                 return ($http({
                     url: config.baseUrl + "/clickstream",
                     method: "POST",

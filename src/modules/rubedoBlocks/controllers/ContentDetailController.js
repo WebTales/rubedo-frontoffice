@@ -114,13 +114,6 @@ angular.module("rubedoBlocks").lazy.controller("ContentDetailController",["$scop
                             }
                         });
                     }
-                    $rootScope.$broadcast("ClickStreamEvent",{csEvent:"contentDetailView",csEventId:me.content.id,csEventArgs:{
-                        contentId:me.content.id,
-                        siteId:options.pageId,
-                        pageId:options.siteId,
-                        typeId:me.content.typeId,
-                        taxonomyTerms:allContentTerms
-                    },csEventLabel:me.content.fields.text});
                 }
             }
         );
