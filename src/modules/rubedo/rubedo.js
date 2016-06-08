@@ -393,9 +393,6 @@
         me.fireCSEvent=function(event,args){
             $rootScope.$broadcast("ClickStreamEvent",{csEvent:event,csEventArgs:args});
         };
-        //temporary test
-        window.fireCSEvent=me.fireCSEvent;
-        //end temporary test
 
         USER=UXUserService;
         $scope.USER=USER;
@@ -522,7 +519,9 @@
                         }
                     });
                 }
-                //$rootScope.$broadcast("ClickStreamEvent",{csEvent:"pageView"});
+                if(newPage.clickStreamEvent){
+                    $rootScope.$broadcast("ClickStreamEvent",{csEvent:newPage.clickStreamEvent});
+                }
 
             }
         },function(response){
