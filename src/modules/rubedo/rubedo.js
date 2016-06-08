@@ -519,7 +519,7 @@
                         }
                     });
                 }
-                if(newPage.clickStreamEvent){
+                if(newPage.clickStreamEvent&&newPage.clickStreamEvent!=""){
                     $rootScope.$broadcast("ClickStreamEvent",{csEvent:newPage.clickStreamEvent});
                 }
 
