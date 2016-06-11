@@ -17,6 +17,7 @@
             RubedoPagesService.getPageById(config.searchPage).then(function(response){
                 if (response.data.success){
                     $location.url(response.data.url+paramQuery);
+                    $scope.handleCSEvent("useSearch");
                 }
             });
         };
