@@ -26,12 +26,13 @@ angular.module("rubedoBlocks").lazy.controller('MailingListUnsuscribeController'
                     text: $scope.rubedo.translate("Blocks.SignUp.emailConfirmError.userUpdateFailed")
                 };
             });
+            $scope.handleCSEvent("submit");
         } else {
             $scope.notification = {
                 type: 'error',
                 text: $scope.rubedo.translate("Blocks.UserProfile.Error.EmailNotValid")
             };
         }
-    }
+    };
     $scope.clearORPlaceholderHeight();
 }]);

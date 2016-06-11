@@ -65,7 +65,9 @@ angular.module("rubedoBlocks").lazy.controller('MailingListSuscribeController',[
                         text: $scope.rubedo.translate("Blocks.Subscribe.Status.Fail")
                     };
                 });
+                $scope.handleCSEvent("submit");
             }
+
         } else {
             $scope.notification = {
                 type: 'error',
