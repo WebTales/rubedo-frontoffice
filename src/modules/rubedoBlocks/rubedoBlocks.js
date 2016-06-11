@@ -405,6 +405,11 @@
                 $scope.blockEnterFOV=function(){
                     me.isInView=true;
                 };
+                $scope.handleCSEvent=function(event,args){
+                    if($scope.blockConfig.csEventConfig&&$scope.blockConfig.csEventConfig[event]&&$scope.blockConfig.csEventConfig[event]!=""){
+                        $scope.rubedo.fireCSEvent($scope.blockConfig.csEventConfig[event],args);
+                    }
+                };
                 $scope.clearORPlaceholderHeight=function(){
                     if(me.minHeightIsArtificial){
                          setTimeout(function(){ delete(me.minBlockHeight);me.minHeightIsArtificial=false; }, 100);
