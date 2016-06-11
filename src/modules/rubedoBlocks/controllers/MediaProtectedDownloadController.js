@@ -37,6 +37,7 @@ angular.module("rubedoBlocks").lazy.controller('MediaProtectedDownloadController
                     text: response.data.message&&response.data.message!="" ? response.data.message : $scope.rubedo.translate("Exception104", null, ["%1$s"], [me.email])
                 };
             });
+            $scope.handleCSEvent("submit");
         }
     };
 }]);

@@ -9,7 +9,7 @@ angular.module("rubedoBlocks").lazy.controller('MediaDownloadController',['$scop
         if(response.data.success){
             me.media =  response.data.media;
             me.intro = null;
-            if(typeof response.data.intro != "undefined") {
+            if(response.data.intro&&response.data.intro.content) {
                 me.intro = response.data.intro.content;
             }
             $scope.clearORPlaceholderHeight();
