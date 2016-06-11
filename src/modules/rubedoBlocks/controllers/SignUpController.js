@@ -58,6 +58,7 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
                             RubedoMailingListService.subscribeToMailingLists(options).then(function(response){
                             },function(response){
                             });
+                            $scope.handleCSEvent("mailingListSubscribe");
                         }
                     }
                     $scope.rubedo.sendGaEvent('/form/', 'sign up');
@@ -69,7 +70,7 @@ angular.module("rubedoBlocks").lazy.controller('SignUpController',['$scope','Rub
                 me.signupError=response.data.message;
             }
         );
-        //$scope.rubedo.fireCSEvent("signUpFormSubmit",me.userType.id,{pageId:$scope.rubedo.current.page.id,siteId:$scope.rubedo.current.site.id});
+        $scope.handleCSEvent("submit");
     };
     var queryParams=$location.search();
     if (queryParams.confirmingEmail&&queryParams.userId&&queryParams.signupTime){
