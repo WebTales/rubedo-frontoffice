@@ -36,6 +36,7 @@ angular.module("rubedoBlocks").lazy.controller("AuthenticationController",["$sco
     me.recoverPwdModal=function(){
         angular.element('#rubedoAuthModal').appendTo('body').modal('hide');
         angular.element('#rubedoRecoverPwdModal').appendTo('body').modal('show');
+        $scope.handleCSEvent("forgotPassword");
     };
     me.changePassword = function(){
         if(me.newPassword != me.newConfirmPassword){
@@ -119,11 +120,12 @@ angular.module("rubedoBlocks").lazy.controller("AuthenticationController",["$sco
                     me.authError=responseAuth.data.message;
                 }
             );
+            $scope.handleCSEvent("submit");
         }
     };
     me.logOut=function(){
         RubedoAuthService.clearPersistedTokens();
         window.location.reload();
-    }
+    };
     $scope.clearORPlaceholderHeight();
 }]);
