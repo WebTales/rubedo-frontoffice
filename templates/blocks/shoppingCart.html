@@ -37,11 +37,11 @@
             <h5><strong>{{ rubedo.translate('Blocks.ShoppingCart.Total')}}</strong> : {{shoppingCartCtrl.detailedCart.totalTaxedPrice | number :2}} €</h5>
             <a ng-if="shoppingCartCtrl.checkoutPageUrl"
                ng-href="{{shoppingCartCtrl.checkoutPageUrl}}">
-                <button class="btn btn-primary">{{ rubedo.translate('Label.Checkout')}}</button>
+                <button ng-click="handleCSEvent('clickCheckout')" class="btn btn-primary">{{ rubedo.translate('Label.Checkout')}}</button>
             </a>
             <a ng-if="shoppingCartCtrl.cartDetailPageUrl"
                ng-href="{{shoppingCartCtrl.cartDetailPageUrl}}">
-                <button class="btn btn-primary">{{ rubedo.translate('Blocks.ShoppingCart.ViewCart')}}</button>
+                <button ng-click="handleCSEvent('clickViewCart')" class="btn btn-primary">{{ rubedo.translate('Blocks.ShoppingCart.ViewCart')}}</button>
             </a>
         </ul>
     </div>
@@ -97,7 +97,7 @@
             <h5><strong>{{ rubedo.translate('Blocks.ShoppingCart.Total')}}</strong> : {{shoppingCartCtrl.detailedCart.totalTaxedPrice | number :2}} €</h5>
             <a ng-if="shoppingCartCtrl.checkoutPageUrl"
                ng-href="{{shoppingCartCtrl.checkoutPageUrl}}">
-                <button class="btn btn-primary">{{ rubedo.translate('Label.Checkout')}}</button>
+                <button ng-click="handleCSEvent('clickCheckout')" class="btn btn-primary">{{ rubedo.translate('Label.Checkout')}}</button>
             </a>
         </div>
     </div>

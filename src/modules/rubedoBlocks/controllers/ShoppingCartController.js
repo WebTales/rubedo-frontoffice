@@ -56,6 +56,7 @@ angular.module("rubedoBlocks").lazy.controller("ShoppingCartController",["$scope
                 }
             }
         );
+        $scope.handleCSEvent("addProduct");
     };
     me.removeFromCart=function(productId,variationId,amount){
         var options={
@@ -78,6 +79,7 @@ angular.module("rubedoBlocks").lazy.controller("ShoppingCartController",["$scope
                 }
             }
         );
+        $scope.handleCSEvent("removeProduct");
     };
     $scope.$on("shoppingCartUpdated",function(event,args){
         if (args&&args.emitter!=me.blockId){
