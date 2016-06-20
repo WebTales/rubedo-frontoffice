@@ -136,6 +136,13 @@ angular.module("rubedoBlocks").lazy.controller("ContentContributionController",[
                     }
                 );
             }
+            if(me.submitStatus=='draft'){
+                $scope.handleCSEvent("saveDraft");
+            } else if(me.submitStatus=='pending'){
+                $scope.handleCSEvent("submit");
+            } else if(me.submitStatus=='published'){
+                $scope.handleCSEvent("publish");
+            }
         }
     };
 }]);
