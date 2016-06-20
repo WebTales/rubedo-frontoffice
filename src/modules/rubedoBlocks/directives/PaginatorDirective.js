@@ -52,8 +52,8 @@ angular.module("rubedoBlocks").lazy.directive("paginator",["$timeout",function($
                         me.actualPage = value + 1;
                     }
                     $scope.start = (value * $scope.limit);
-
                     $timeout($scope.changePageAction);
+                    $scope.$parent.handleCSEvent("changePage");
                 }
             };
         },
