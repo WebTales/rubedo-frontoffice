@@ -32,6 +32,7 @@ angular.module("rubedoBlocks").lazy.controller("ProductSearchController",["$scop
                     $rootScope.$broadcast("shoppingCartUpdated",{emitter:"searchProductBox"});
                 }
             );
+            $scope.handleCSEvent("addToCart");
         };
         me.data = [];
         me.facets = [];

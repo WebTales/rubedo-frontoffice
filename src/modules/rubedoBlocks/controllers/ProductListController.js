@@ -216,6 +216,7 @@ angular.module("rubedoBlocks").lazy.controller("ProductListDetailController",['$
                 $rootScope.$broadcast("shoppingCartUpdated",{emitter:"listProductBox"});
             }
         );
+        $scope.handleCSEvent("addToCart");
     };
     $scope.fieldEntity=angular.copy(me.content.fields);
     $scope.fieldLanguage=me.content.locale;
