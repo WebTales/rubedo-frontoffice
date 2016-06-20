@@ -21,7 +21,7 @@
                     <td> {{ rubedo.translate('Blocks.UserOrders.Status.'+item.status,item.status) }}</td>
                     <td ng-if="userOrdersCtrl.orderDetailPageUrl">
                         <a ng-href="{{ userOrdersCtrl.orderDetailPageUrl }}?order={{ item.id }}" >
-                            <button class="btn btn-default"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> {{ rubedo.translate('Blocks.UserOrders.ViewDetails')}}</button>
+                            <button ng-click="handleCSEvent('orderClick')" class="btn btn-default"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> {{ rubedo.translate('Blocks.UserOrders.ViewDetails')}}</button>
                         </a>
                     </td>
                 </tr>

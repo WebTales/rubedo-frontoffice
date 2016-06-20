@@ -142,6 +142,7 @@ angular.module("rubedoBlocks").lazy.controller("UserProfileController",["$scope"
                 $scope.rubedo.addNotification("danger",$scope.rubedo.translate("Block.error", "Error !"),$scope.rubedo.translate("Blocks.UserProfile.Error.UserNotUpdated", "Profile update error."));
             }
         );
+        $scope.handleCSEvent("submit");
     };
     me.enterEditMode=function(){
         $scope.fieldInputMode=true;
