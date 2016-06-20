@@ -194,6 +194,7 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
                                 },function(mlresponse){
                                     window.location.reload();
                                 });
+                                $scope.handleCSEvent("mailingListSubscribe");
                             } else{
                                 window.location.reload();
                             }
@@ -205,6 +206,7 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
                 me.stage2Error=response.data.message;
             }
         );
+        $scope.handleCSEvent("signUp");
     };
     me.refreshShippers=function(){
         RubedoShippersService.getShippers().then(
@@ -215,7 +217,7 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
             }
         );
     };
-    me.persistUserChanges=function(errorHolder,refreshShippers){
+    me.persistUserChanges=function(errorHolder,refreshShippers,event){
         var payload=angular.copy(me.currentUser);
         payload.fields=angular.copy($scope.fieldEntity);
         delete (payload.type);
@@ -225,6 +227,9 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
                     me.refreshShippers();
                 } else {
                     me.setCurrentStage(me.currentStage+1);
+                }
+                if (event){
+                    $scope.handleCSEvent(event);
                 }
             },
             function(response){
@@ -237,18 +242,18 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
         if (!$scope.rubedo.current.user){
             me.createUser();
         } else {
-            me.persistUserChanges(me.stage2Error);
+            me.persistUserChanges(me.stage2Error,false,"validateContactInformation");
         }
     };
 
     me.handleStage3Submit=function(){
         me.stage3Error=null;
-        me.persistUserChanges(me.stage3Error);
+        me.persistUserChanges(me.stage3Error,false,"validateBillingDetails");
     };
 
     me.handleStage4Submit=function(){
         me.stage4Error=null;
-        me.persistUserChanges(me.stage4Error,true);
+        me.persistUserChanges(me.stage4Error,true,"validateShippingDetails");
     };
 
     me.handleStage5Submit=function(){
@@ -257,6 +262,7 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
             me.stage5Error="Please choose a shipper"
         } else {
             me.setCurrentStage(me.currentStage+1);
+            $scope.handleCSEvent("validateShippingMethod");
         }
     };
 
@@ -280,6 +286,7 @@ angular.module("rubedoBlocks").lazy.controller("CheckoutController",["$scope","R
                 }
             }
         );
+        $scope.handleCSEvent("submit");
 
     };
     me.mailingLists={};

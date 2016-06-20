@@ -120,7 +120,7 @@ angular.module("rubedoBlocks").lazy.controller("AuthenticationController",["$sco
                     me.authError=responseAuth.data.message;
                 }
             );
-            $scope.handleCSEvent("submit");
+            $scope.handleCSEvent("submitAuth");
         }
     };
     me.logOut=function(){
