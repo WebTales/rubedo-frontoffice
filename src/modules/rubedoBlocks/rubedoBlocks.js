@@ -460,6 +460,20 @@
             };
         });
 
+    module.directive('rubedoEvent',
+        function () {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    element.click(function(e) {
+                        if(attrs.rubedoEvent&&attrs.rubedoEvent!=""){
+                            scope.rubedo.fireCSEvent(attrs.rubedoEvent);
+                        }
+                    });
+                }
+            };
+        });
+
     module.directive('scrollTo', function ($location, $anchorScroll) {
         return {
             restrict: 'A',
