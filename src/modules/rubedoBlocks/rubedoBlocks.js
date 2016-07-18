@@ -110,7 +110,8 @@
         },
         "directory": {
             "template": "/templates/blocks/directory.html",
-            "internalDependencies":["/src/modules/rubedoBlocks/controllers/DirectoryController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"]
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/DirectoryController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"],
+            "externalDependencies":['/components/jquery/fullCalendar/lib/jquery-ui.custom.min.js','/components/jquery/fullCalendar/fullcalendar.min.js','/components/jquery/fullCalendar/lang/en-gb.js','/components/jquery/fullCalendar/lang/fr.js']
         },
         "audio": {
             "template": "/templates/blocks/audio.html",
@@ -130,7 +131,9 @@
         },
         "geoSearchResults": {
             "template": "/templates/blocks/geoSearchResults.html",
-            "internalDependencies":["/src/modules/rubedoBlocks/controllers/GeoSearchResultsController.js"]
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/GeoSearchResultsController.js"],
+            "externalDependencies":['/components/jquery/fullCalendar/lib/jquery-ui.custom.min.js','/components/jquery/fullCalendar/fullcalendar.min.js','/components/jquery/fullCalendar/lang/en-gb.js','/components/jquery/fullCalendar/lang/fr.js']
+
         },
         "addThis": {
             "template": "/templates/blocks/addThisShare.html",
@@ -194,7 +197,9 @@
         },
         "productSearch": {
             "template": "/templates/blocks/productSearch.html",
-            "internalDependencies":["/src/modules/rubedoBlocks/controllers/ProductSearchController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"]
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/ProductSearchController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"],
+            "externalDependencies":['/components/jquery/fullCalendar/lib/jquery-ui.custom.min.js','/components/jquery/fullCalendar/fullcalendar.min.js','/components/jquery/fullCalendar/lang/en-gb.js','/components/jquery/fullCalendar/lang/fr.js']
+
         },
         "category": {
             "template": "/templates/blocks/category.html",
@@ -537,7 +542,7 @@
                         },
                         height:200,
                         eventClick: function(calEvent, jsEvent, view) {
-                            $scope.searchResultsCtrl.clickOnFacets($scope.facet.id, calEvent.termId);
+                            $scope.clickOnFacets($scope.facet.id, calEvent.termId);
                         },
                         viewRender: function(view){
                             var newEvents = [];

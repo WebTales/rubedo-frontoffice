@@ -204,7 +204,7 @@ angular.module("rubedoBlocks").lazy.controller("ProductSearchController",["$scop
             me.start = 0;
             options.start = me.start;
         };
-
+        $scope.clickOnFacets=me.clickOnFacets;
         me.searchByQuery = function(options){
             RubedoSearchService.searchProducts(options).then(function(response){
                 if(response.data.success){
@@ -221,6 +221,7 @@ angular.module("rubedoBlocks").lazy.controller("ProductSearchController",["$scop
                                 var newTerm = {};
                                 newTerm.term = term.term;
                                 newTerm.label = term.label;
+                                newTerm["_type"] = term["_type"];
                                 newTerm.facetId = activeFacet.id;
                                 if(previousFacetId == activeFacet.id){
                                     newTerm.operator =' '+(activeFacet.operator)+' ';

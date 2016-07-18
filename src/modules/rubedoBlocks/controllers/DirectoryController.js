@@ -213,6 +213,7 @@ angular.module("rubedoBlocks").lazy.controller('DirectoryController',["$scope","
                 }
             })
         };
+        $scope.clickOnFacets=me.clickOnFacets;
         parseQueryParamsToOptions();
         me.searchByQuery(options);
     }]);

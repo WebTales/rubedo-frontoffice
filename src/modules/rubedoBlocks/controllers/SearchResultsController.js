@@ -210,6 +210,7 @@ angular.module("rubedoBlocks").lazy.controller("SearchResultsController",["$scop
                 }
             })
         };
+        $scope.clickOnFacets=me.clickOnFacets;
         parseQueryParamsToOptions();
         me.searchByQuery(options);
     }]);
