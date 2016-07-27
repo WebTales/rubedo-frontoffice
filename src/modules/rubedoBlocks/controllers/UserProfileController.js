@@ -169,6 +169,7 @@ angular.module("rubedoBlocks").lazy.controller("UserProfileController",["$scope"
                                 newMailing.name = mailingInfo.name;
                                 newMailing.checked = me.user.mailingLists && me.user.mailingLists[mailing] && me.user.mailingLists[mailing].status;
                                 me.mailingLists[mailing] = newMailing;
+                                me.hasMailingLists=true;
                             }
                         });
                     });
