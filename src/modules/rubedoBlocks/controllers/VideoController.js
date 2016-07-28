@@ -2,6 +2,7 @@ angular.module("rubedoBlocks").lazy.controller("VideoController",["$scope","Rube
     var me=this;
     var config = $scope.blockConfig;
     var mediaId=config.videoFile;
+    me.hasPlayed=false;
     me.displayMedia=function(){
         if (me.media&&me.media.originalFileId){
             me.jwSettings={
@@ -20,7 +21,16 @@ angular.module("rubedoBlocks").lazy.controller("VideoController",["$scope","Rube
             if (config.videoPoster){
                 me.jwSettings.image=RubedoImageUrlService.getUrlByMediaId(config.videoPoster,{});
             }
-            setTimeout(function(){jwplayer("video"+me.media.originalFileId).setup(me.jwSettings); $scope.clearORPlaceholderHeight(); }, 200);
+            setTimeout(function(){
+                jwplayer("video"+me.media.originalFileId).setup(me.jwSettings);
+                jwplayer("video"+me.media.originalFileId).onPlay(function(){
+                    if(!me.hasPlayed){
+                        $scope.handleCSEvent("play");
+                        me.hasPlayed=true;
+                    }
+                });
+                $scope.clearORPlaceholderHeight();
+            }, 200);
         }
     };
     if (mediaId){

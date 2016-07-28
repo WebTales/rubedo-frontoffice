@@ -2,6 +2,7 @@ angular.module("rubedoBlocks").lazy.controller("AudioController",["$scope","Rube
     var me=this;
     var config = $scope.blockConfig;
     var mediaId=config.audioFile;
+    me.hasPlayed=false;
     me.displayMedia=function(){
         if (me.media&&me.media.originalFileId){
             me.jwSettings={
@@ -12,7 +13,16 @@ angular.module("rubedoBlocks").lazy.controller("AudioController",["$scope","Rube
                 repeat:config.audioLoop,
                 file:me.media.url
             };
-            setTimeout(function(){jwplayer("audio"+me.media.originalFileId).setup(me.jwSettings); $scope.clearORPlaceholderHeight();}, 200);
+            setTimeout(function(){
+                jwplayer("audio"+me.media.originalFileId).setup(me.jwSettings);
+                jwplayer("audio"+me.media.originalFileId).onPlay(function(){
+                    if(!me.hasPlayed){
+                        $scope.handleCSEvent("play");
+                        me.hasPlayed=true;
+                    }
+                });
+                $scope.clearORPlaceholderHeight();
+            }, 200);
         }
     };
     if (mediaId){
