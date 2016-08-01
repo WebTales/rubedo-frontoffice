@@ -392,6 +392,7 @@
             templateUrl:themePath+"/templates/rubedoBlock.html",
             controller: ['$scope', function($scope) {
                 var me=this;
+                $scope.loadModalContent=false;
                 $scope.blockConfig=$scope.block.configBloc;
                 me.minBlockHeight=$scope.block.configBloc.blockMinHeight;
                 me.responsiveSettings=$scope.block.responsive ? $scope.block.responsive : {};
@@ -407,6 +408,12 @@
                 $scope.getBlockMinHeight=function(){
                     return(me.minBlockHeight);
                 };
+                $scope.$on("RubedoShowModal",function(event,args){
+                    if (args&&args.block&&args.block==$scope.block.code&&$scope.blockConfig.renderAsEventModal){
+                        angular.element('#modalblock'+$scope.block.id).appendTo('body').modal('show');
+                        $scope.loadModalContent=true;
+                    }
+                });
                 $scope.blockEnterFOV=function(){
                     me.isInView=true;
                 };
@@ -423,6 +430,13 @@
                 $scope.canDisplayBlock=function(){
                     return (isACrawler||((!$scope.rubedo.current.site.optimizedRender||$scope.blockConfig.bypassOptimizer||me.isInView)&&(!windowType||me.responsiveSettings[windowType]!==false)));
                 };
+                if($scope.rubedo.current&&$scope.rubedo.current.UXParams&&$scope.rubedo.current.UXParams.initialEvents&&$scope.rubedo.current.UXParams.initialEvents[$scope.block.code]&&$scope.rubedo.current.UXParams.initialEvents[$scope.block.code].RubedoShowModal){
+                    $scope.loadModalContent=true;
+                    setTimeout(function(){
+                        angular.element('#modalblock'+$scope.block.id).appendTo('body').modal('show');
+
+                    },300)
+                }
             }]
         };
     });
