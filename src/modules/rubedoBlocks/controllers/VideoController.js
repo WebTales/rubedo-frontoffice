@@ -22,8 +22,8 @@ angular.module("rubedoBlocks").lazy.controller("VideoController",["$scope","Rube
                 me.jwSettings.image=RubedoImageUrlService.getUrlByMediaId(config.videoPoster,{});
             }
             setTimeout(function(){
-                jwplayer("video"+me.media.originalFileId).setup(me.jwSettings);
-                jwplayer("video"+me.media.originalFileId).onPlay(function(){
+                jwplayer("video"+me.media.id).setup(me.jwSettings);
+                jwplayer("video"+me.media.id).onPlay(function(){
                     if(!me.hasPlayed){
                         $scope.handleCSEvent("play");
                         me.hasPlayed=true;

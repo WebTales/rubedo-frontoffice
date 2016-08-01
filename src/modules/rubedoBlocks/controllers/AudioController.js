@@ -14,8 +14,8 @@ angular.module("rubedoBlocks").lazy.controller("AudioController",["$scope","Rube
                 file:me.media.url
             };
             setTimeout(function(){
-                jwplayer("audio"+me.media.originalFileId).setup(me.jwSettings);
-                jwplayer("audio"+me.media.originalFileId).onPlay(function(){
+                jwplayer("audio"+me.media.id).setup(me.jwSettings);
+                jwplayer("audio"+me.media.id).onPlay(function(){
                     if(!me.hasPlayed){
                         $scope.handleCSEvent("play");
                         me.hasPlayed=true;
