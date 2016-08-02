@@ -16,6 +16,7 @@
                             {{content.title}}
                         </a>
                     </h4>
+                    <span>{{ content.lastUpdateTime*1000 | date }}</span>
                     <p ng-if="!blockConfig.showOnlyTitle" class="text-justify" ng-style="rccCtrl.summaryStyle">
                         {{content.summary}}
                     </p>
