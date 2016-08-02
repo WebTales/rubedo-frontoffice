@@ -40,8 +40,8 @@ angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",[
             siteId: $scope.rubedo.current.site.id,
             fingerprint:USER.RUID(),
             isMagic:true,
-            historyDepth: config.historyDepth ? config.historyDepth : 30,
-            historySize : config.historySize  ? config.historySize  : 50
+            historyDepth: config.historyDepth ? config.historyDepth : null,
+            historySize : config.historySize  ? config.historySize  : null
         };
         if (config.singlePage){
             defaultOptions.detailPageId = config.singlePage;
