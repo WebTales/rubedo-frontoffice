@@ -2,7 +2,7 @@
     <div class="row">
         <div ng-repeat="content in rccCtrl.data track by $index" ng-class="rccCtrl.colClass">
             <div class="row">
-                <div ng-style="rccCtrl.imageStyle" class="col-md-2">
+                <div ng-style="rccCtrl.imageStyle" class="col-md-2" ng-if="rccCtrl.displayImage">
                     <a ng-href="{{ content.url }}">
                         <img class="img-responsive center-block" ng-if="content['fields.'+rccCtrl.imageField] && !rccCtrl.titleOnly"
                              ng-src="{{rubedo.imageUrl.getUrlByMediaId(content['fields.'+rccCtrl.imageField],{mode:rccCtrl.imageResizeMode,height:rccCtrl.imageHeight,width:rccCtrl.imageWidth}) }}"
@@ -10,13 +10,13 @@
                                 />
                     </a>
                 </div>
-                <div class="col-md-8">
+                <div ng-class="{'col-md-12':!rccCtrl.displayImage,'col-md-8':rccCtrl.displayImage}">
                     <h4>
                         <a ng-href="{{ content.url }}">
                             {{content.title}}
                         </a>
                     </h4>
-                    <p class="text-justify" ng-style="rccCtrl.summaryStyle">
+                    <p ng-if="!blockConfig.showOnlyTitle" class="text-justify" ng-style="rccCtrl.summaryStyle">
                         {{content.summary}}
                     </p>
                 </div>

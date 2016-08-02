@@ -11,6 +11,7 @@ angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",[
         me.columns = config.columns ? config.columns : 1;
         me.colWidth=12/me.columns;
         me.colClass="col-md-"+me.colWidth;
+        me.displayImage=config.displayImage;
         me.imageField= config.imageField ? config.imageField : "image";
         me.imageHeight= config.imageHeight ? config.imageHeight : null;
         me.imageWidth= config.imageWidth ? config.imageWidth : null;
