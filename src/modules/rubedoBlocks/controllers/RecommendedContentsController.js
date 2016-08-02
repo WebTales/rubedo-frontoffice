@@ -37,11 +37,11 @@ angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",[
             displayMode: config.displayMode,
             displayedFacets: '["all"]',
             pageId: $scope.rubedo.current.page.id,
-            siteId: $scope.rubedo.current.site.id
-            //fingerprint:USER.RUID(),
-            //isMagic:true,
-            //historyDepth: config.historyDepth ? config.historyDepth : 30,
-            //historySize : config.historySize  ? config.historySize  : 50
+            siteId: $scope.rubedo.current.site.id,
+            fingerprint:USER.RUID(),
+            isMagic:true,
+            historyDepth: config.historyDepth ? config.historyDepth : 30,
+            historySize : config.historySize  ? config.historySize  : 50
         };
         if (config.singlePage){
             defaultOptions.detailPageId = config.singlePage;
