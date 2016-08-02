@@ -416,6 +416,11 @@
                 params: options
             }));
         };
+        serviceInstance.searchContents = function(options){
+            return ($http.get(config.baseUrl+"/contents/search",{
+                params: options
+            }));
+        };
         //Products Search
         serviceInstance.searchProducts = function(options){
             return ($http.get(config.baseUrl+"/ecommerce/products/search",{

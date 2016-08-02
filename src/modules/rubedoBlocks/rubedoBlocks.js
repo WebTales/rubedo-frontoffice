@@ -216,6 +216,10 @@
         "rssFeed": {
             "template": "/templates/blocks/rssFeed.html",
             "internalDependencies":["/src/modules/rubedoBlocks/controllers/RSSFeedController.js"]
+        },
+        "recommendedContents": {
+            "template": "/templates/blocks/recommendedContents.html",
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/RecommendedContentsController.js"]
         }
     };
 

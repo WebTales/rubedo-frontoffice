@@ -1,0 +1,29 @@
+<div ng-controller="RecommendedContentsController as rccCtrl">
+    <div class="row">
+        <div ng-repeat="content in rccCtrl.data track by $index" ng-class="rccCtrl.colClass">
+            <div class="row">
+                <div ng-style="rccCtrl.imageStyle" class="col-md-2">
+                    <a ng-href="{{ content.url }}">
+                        <img class="img-responsive center-block" ng-if="content['fields.'+rccCtrl.imageField] && !rccCtrl.titleOnly"
+                             ng-src="{{rubedo.imageUrl.getUrlByMediaId(content['fields.'+rccCtrl.imageField],{mode:rccCtrl.imageResizeMode,height:rccCtrl.imageHeight,width:rccCtrl.imageWidth}) }}"
+                             alt="{{ content.title }}"
+                                />
+                    </a>
+                </div>
+                <div class="col-md-8">
+                    <h4>
+                        <a ng-href="{{ content.url }}">
+                            {{content.title}}
+                        </a>
+                    </h4>
+                    <p class="text-justify" ng-style="rccCtrl.summaryStyle">
+                        {{content.summary}}
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <paginator ng-if="blockConfig.showPager" start="rccCtrl.start" limit="rccCtrl.limit"
+               count="rccCtrl.count" change-page-action="rccCtrl.changePageAction()"></paginator>
+</div>
