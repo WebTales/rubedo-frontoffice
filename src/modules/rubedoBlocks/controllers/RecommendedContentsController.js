@@ -35,7 +35,7 @@ angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",[
             constrainToSite: config.constrainToSite,
             predefinedFacets: config.predefinedFacets,
             displayMode: config.displayMode,
-            displayedFacets: '["all"]',
+            displayedFacets: "['all']",
             pageId: $scope.rubedo.current.page.id,
             siteId: $scope.rubedo.current.site.id,
             fingerprint:USER.RUID(),
