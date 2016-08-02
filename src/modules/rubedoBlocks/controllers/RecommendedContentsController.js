@@ -24,8 +24,8 @@ angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",[
         me.data = [];
         me.facets = [];
         me.activeFacets = [];
-        me.start = 0;
-        me.limit = $routeParams.limit?$routeParams.limit:10;
+        me.limit = config.pageSize ? config.pageSize:10;
+        me.start = config.resultsSkip ? config.resultsSkip:0;
         var predefinedFacets = !config.predefinedFacets?{}:JSON.parse(config.predefinedFacets);
         var facetsId = ['objectType','type','damType','userType','author','userName','lastupdatetime','price','inStock','query'];
         var defaultOptions = {

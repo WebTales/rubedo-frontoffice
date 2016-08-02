@@ -219,7 +219,7 @@
         },
         "recommendedContents": {
             "template": "/templates/blocks/recommendedContents.html",
-            "internalDependencies":["/src/modules/rubedoBlocks/controllers/RecommendedContentsController.js"]
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/RecommendedContentsController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"]
         }
     };
 
