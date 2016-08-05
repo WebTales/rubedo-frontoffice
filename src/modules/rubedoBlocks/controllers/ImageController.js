@@ -11,14 +11,16 @@ angular.module("rubedoBlocks").lazy.controller("ImageController",["$scope","$htt
             }
         });
     }
-
-    $http.get("/api/v1/media/" + config.imageFile).then(
-        function(response) {
-            if(response.data.success) {
-                me.imageTitle = response.data.media.fields.title;
-                $scope.clearORPlaceholderHeight();
+    
+    if(config.imageFile) {
+        $http.get("/api/v1/media/" + config.imageFile).then(
+            function(response) {
+                if(response.data.success) {
+                    me.imageTitle = response.data.media.fields.title;
+                    $scope.clearORPlaceholderHeight();
+                }
             }
-        }
-    );
+        );
+    }
 
 }]);
