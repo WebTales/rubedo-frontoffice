@@ -315,7 +315,7 @@
                 ipCookie("refreshToken",refreshToken,{path:"/",expires:8760, expirationUnit:"hours"});
                 ipCookie("rememberMe","true",{path:"/",expires:8760, expirationUnit:"hours"});
             } else {
-                ipCookie("refreshToken",refreshToken,{path:"/"});
+                ipCookie("refreshToken",refreshToken,{path:"/",expires:lifetime*2, expirationUnit:"seconds"});
             }
             config.accessToken=accessToken;
         };
