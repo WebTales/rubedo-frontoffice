@@ -94,6 +94,14 @@ angular.module("rubedoBlocks").lazy.controller("UserProfileController",["$scope"
         delete(payload.photo);
         delete(payload.photoUrl);
         delete (payload.type);
+        if(payload.fields.password&&payload.fields.password==""){
+            delete payload.fields.password;
+
+        } else if (payload.fields.password&&payload.fields.password!=payload.fields.confirmPassword){
+            $scope.rubedo.addNotification("danger",$scope.rubedo.translate("Block.error", "Error !"),$scope.rubedo.translate("Blocks.UserProfile.Error.PasswordConfirmNotMatch", "Passwords don't match"));
+            return;
+        }
+        delete payload.fields.confirmPassword;
         RubedoUsersService.updateUser(payload).then(
             function(response){
                 if (config.mailingListId){

@@ -3,6 +3,29 @@
         <button ng-show="!fieldInputMode" ng-click="userProfileCtrl.enterEditMode()" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> {{rubedo.translate("Label.Edit", "Edit")}}</button>
     </div>
     <div ng-include="userProfileCtrl.detailTemplate"></div>
+    <div ng-if="fieldInputMode" class="form form-horizontal">
+        <div class="form-group">
+            <label for="{{fieldIdPrefix+'_password'}}" class="control-label">{{rubedo.translate('Blocks.UserProfile.Label.NewPassword','New password')}} </label>
+            <div>
+                <input type="password"
+                       class="form-control"
+                       id="{{fieldIdPrefix+'_password'}}"
+                       ng-model="fieldEntity.password"
+                        >
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="{{fieldIdPrefix+'_confirmPassword'}}" class="control-label">{{rubedo.translate('Blocks.UserProfile.Label.NewPasswordConfirm','Confirm new password')}} </label>
+            <div>
+                <input type="password"
+                       class="form-control"
+                       id="{{fieldIdPrefix+'_confirmPassword'}}"
+                       ng-model="fieldEntity.confirmPassword"
+                        >
+            </div>
+        </div>
+    </div>
     <div ng-if="userProfileCtrl.canEdit&&userProfileCtrl.hasMailingLists&&userProfileCtrl.user.type.fields">{{rubedo.translate('Blocks.UserProfile.Label.SubscribedNews', 'My subscribed newsletters')}}
         <div ng-repeat="mailingList in userProfileCtrl.mailingLists track by $index" class="checkbox">
             <label>
