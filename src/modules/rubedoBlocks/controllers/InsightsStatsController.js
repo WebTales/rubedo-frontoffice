@@ -1,12 +1,11 @@
 angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scope",'$http', function($scope, $http){
     var me = this;
     var config=$scope.blockConfig;
-    var halfrange=parseInt(config.interval/2);
     me.queryParams={
         "events[]":config.events,
         granularity:config.granularity,
-        startDate:moment().subtract(halfrange,"days").format("YYYY-MM-DD"),
-        endDate:moment().add(halfrange,"days").format("YYYY-MM-DD")
+        startDate:moment().subtract(config.interval,"days").format("YYYY-MM-DD"),
+        endDate:moment().format("YYYY-MM-DD")
     };
     var baseConfig={
         title: config.title,
