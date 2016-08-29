@@ -4,11 +4,11 @@
             <form class="form-inline" ng-submit="isCtrl.drawGraph()">
                 <div class="form-group">
                     <label> From </label>
-                    <input type="date" class="form-control"  ng-model="isCtrl.queryParams.start" required>
+                    <input type="date" class="form-control"  ng-model="isCtrl.queryParams.startDate" required>
                 </div>
                 <div class="form-group">
                     <label> to </label>
-                    <input type="date" class="form-control" ng-model="isCtrl.queryParams.end" required>
+                    <input type="date" class="form-control" ng-model="isCtrl.queryParams.endDate" required>
                 </div>
                 <button type="submit" class="btn btn-default">Redraw</button>
             </form>

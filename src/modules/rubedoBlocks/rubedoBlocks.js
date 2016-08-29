@@ -224,7 +224,7 @@
         "insightsStats": {
             "template": "/templates/blocks/insightsStats.html",
             "internalDependencies":["/src/modules/rubedoBlocks/controllers/InsightsStatsController.js"],
-            "externalDependencies":['/components/mbostock/d3/d3.min.js','/components/mozilla/metrics-graphics/dist/metricsgraphics.min.js']
+            "externalDependencies":['https://d3js.org/d3.v4.min.js','/components/mozilla/metrics-graphics/dist/metricsgraphics.min.js']
         }
     };
 

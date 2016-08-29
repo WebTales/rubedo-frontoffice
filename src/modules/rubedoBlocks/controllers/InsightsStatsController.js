@@ -3,9 +3,10 @@ angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scop
     var config=$scope.blockConfig;
     var halfrange=parseInt(config.interval/2);
     me.queryParams={
-        events:config.events,
-        start:moment().subtract(halfrange,"days").format("YYYY-MM-DD"),
-        end:moment().add(halfrange,"days").format("YYYY-MM-DD")
+        "events[]":config.events,
+        granularity:config.granularity,
+        startDate:moment().subtract(halfrange,"days").format("YYYY-MM-DD"),
+        endDate:moment().add(halfrange,"days").format("YYYY-MM-DD")
     };
     var baseConfig={
         title: config.title,
@@ -15,18 +16,32 @@ angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scop
         right: 40,
         target: "#block"+$scope.block.id,
         x_accessor: 'date',
-        y_accessor: 'value'
+        y_accessor: 'value',
+        aggregate_rollover: true
     };
     me.drawGraph=function(){
-        console.log(me.queryParams);
-        //$http.get("/api/v1/insights/stats",{
-        //    params:me.queryParams
-        //}).then(function(response){
-        //    if (response.data.success){
-        //        delete baseConfig.xax_format;
-        //        baseConfig.data = MG.convert.date(response.data.stats, 'date');
-        //        MG.data_graphic(baseConfig);
-        //    }
-        //});
+        $http.get("/api/v1/clickstream/histogram",{
+            params:me.queryParams
+        }).then(function(response){
+            if (response.data.success){
+                delete baseConfig.xax_format;
+                baseConfig.legend=[];
+                baseConfig.data=[];
+                angular.forEach(response.data.data, function(event) {
+                    baseConfig.legend.push(event.key);
+                    var occurences=[];
+                    angular.forEach(event.dateHistogram.buckets,function(bucket){
+                        occurences.push({
+                            value:bucket["doc_count"],
+                            date:new Date(bucket["key_as_string"])
+                        });
+                    });
+                    baseConfig.data.push(occurences);
+                });
+                MG.data_graphic(baseConfig);
+            }
+        });
+
     };
+    me.drawGraph();
 }]);
