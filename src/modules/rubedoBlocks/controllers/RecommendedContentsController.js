@@ -1,5 +1,5 @@
-angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",["$scope","$location","$routeParams","$compile","RubedoSearchService","RubedoShoppingCartService","$rootScope",
-    function($scope,$location,$routeParams,$compile,RubedoSearchService,RubedoShoppingCartService,$rootScope){
+angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",["$scope","$location","RubedoSearchService","$route",
+    function($scope,$location,RubedoSearchService,$route){
         var me = this;
         var config = $scope.blockConfig;
         me.contentHeight = config.summaryHeight ? config.summaryHeight : null;
@@ -83,5 +83,29 @@ angular.module("rubedoBlocks").lazy.controller("RecommendedContentsController",[
                 }
             });
         };
+        if (config.useDetailContent){
+            var routeSegments=$route.current.params.routeline.split("/");
+            var detectedId=null;
+            angular.forEach(routeSegments,function(segment){
+                if (mongoIdRegex.test(segment)){
+                    detectedId=segment;
+                }
+            });
+
+            if(detectedId === null && $scope.rubedo.current.page.blocks) {
+                var blocks = $scope.rubedo.current.page.blocks;
+                for(var key in blocks) {
+                    if(blocks[key].blockData.bType == "contentDetail" && typeof blocks[key].blockData.configBloc.contentId !== "undefined") {
+                        detectedId = blocks[key].blockData.configBloc.contentId;
+                        break;
+                    }
+                }
+            }
+
+            if (detectedId){
+                options.detailContentId=detectedId;
+                options.useDetailContent=true;
+            }
+        }
         me.searchByQuery(options);
     }]);
