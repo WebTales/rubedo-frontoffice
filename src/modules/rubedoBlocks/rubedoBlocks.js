@@ -220,6 +220,11 @@
         "recommendedContents": {
             "template": "/templates/blocks/recommendedContents.html",
             "internalDependencies":["/src/modules/rubedoBlocks/controllers/RecommendedContentsController.js","/src/modules/rubedoBlocks/directives/PaginatorDirective.js"]
+        },
+        "insightsStats": {
+            "template": "/templates/blocks/insightsStats.html",
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/InsightsStatsController.js"],
+            "externalDependencies":['/components/mbostock/d3/d3.min.js','/components/mozilla/metrics-graphics/dist/metricsgraphics.min.js']
         }
     };
 
