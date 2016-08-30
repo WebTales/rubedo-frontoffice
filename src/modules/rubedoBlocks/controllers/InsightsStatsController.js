@@ -23,7 +23,6 @@ angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scop
             params:me.queryParams
         }).then(function(response){
             if (response.data.success){
-                delete baseConfig.xax_format;
                 baseConfig.legend=[];
                 baseConfig.data=[];
                 angular.forEach(response.data.data, function(event) {
