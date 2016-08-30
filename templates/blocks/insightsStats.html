@@ -10,8 +10,28 @@
                     <label> to </label>
                     <input type="date" class="form-control" ng-model="isCtrl.queryParams.endDate" required>
                 </div>
+                <div class="form-group" ng-if="isCtrl.hasActiveFacets">
+                    <label> Filtered by
+                    <span class="badge cursor-as-pointer" ng-repeat="(fKey, fValue) in isCtrl.activeFacets"
+                          ng-click="isCtrl.clearFacet(fKey)">
+                    <span>{{fKey}} : {{fValue}}</span>&nbsp;&times;
+                    </span>
+                    </label>
+                </div>
                 <button type="submit" class="btn btn-default">Redraw</button>
             </form>
+            <div class="row">
+                <div class="col-sm-2" ng-repeat="(facetKey, facetData) in isCtrl.facets" ng-if="facetData.aggregation.buckets.length>0">
+                    <div class="list-group">
+                        <a class="list-group-item active">
+                            {{facetKey}}
+                        </a>
+                        <a  class="list-group-item cursor-as-pointer"
+                            ng-repeat="term in facetData.aggregation.buckets"
+                            ng-click="isCtrl.applyFilter(facetKey,term.key)"><span class="badge">{{term.doc_count}}</span> {{term.key}} </a>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="panel-body">
             <div id="{{'block'+block.id}}"></div>
