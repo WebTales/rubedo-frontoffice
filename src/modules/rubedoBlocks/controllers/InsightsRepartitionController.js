@@ -14,7 +14,8 @@ angular.module("rubedoBlocks").lazy.controller("InsightsRepartitionController",[
                 angular.forEach(response.data.data,function(item){
                     newData.push({
                         label:String(item.key),
-                        value:item.doc_count
+                        value:item.doc_count,
+                        caption:String(item.key)+" : "+String(item.doc_count)
                     })
                 });
                 if(me.pie){
@@ -25,16 +26,22 @@ angular.module("rubedoBlocks").lazy.controller("InsightsRepartitionController",[
                             title: {
                                 text: config.title
                             },
-                            location: "pie-center"
+                            subtitle:{
+                                text:config.description
+                            }
                         },
                         size: {
-                            pieInnerRadius: "40%",
+                            pieInnerRadius: 0,
                             canvasHeight: config.height,
                             canvasWidth: config.width
                         },
                         data: {
                             sortOrder: "label-asc",
                             content: newData
+                        },
+                        tooltips: {
+                            enabled: true,
+                            type: "caption"
                         }
                     });
 
