@@ -199,6 +199,9 @@
     text-align: center !important;
     cursor: pointer;
 }
+.rubedo-insight-facet-box{
+    padding-top:20px;
+}
 @media (max-width: 768px) {
     .dropdown-menu-large {
         margin-left: 0 ;
