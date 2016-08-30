@@ -1,4 +1,4 @@
-angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scope",'$http', function($scope, $http){
+angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scope",'RubedoClickStreamService', function($scope, RubedoClickStreamService){
     var me = this;
     var config=$scope.blockConfig;
     me.activeFacets={};
@@ -29,9 +29,7 @@ angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scop
     };
     me.drawGraph=function(){
         me.queryParams.filters=JSON.stringify(me.filterParam);
-        $http.get("/api/v1/clickstream/histogram",{
-            params:me.queryParams
-        }).then(function(response){
+        RubedoClickStreamService.getEventHistogram(me.queryParams).then(function(response){
             if (response.data.success){
                 delete baseConfig.xax_format;
                 baseConfig.legend=[];
