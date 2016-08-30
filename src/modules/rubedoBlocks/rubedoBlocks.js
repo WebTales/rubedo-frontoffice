@@ -223,8 +223,8 @@
         },
         "insightsStats": {
             "template": "/templates/blocks/insightsStats.html",
-            "internalDependencies":["/src/modules/rubedoBlocks/controllers/InsightsStatsController.js"],
-            "externalDependencies":['/components/mbostock/d3/d3.min.js','/components/mozilla/metrics-graphics/dist/metricsgraphics.min.js']
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/InsightsStatsController.js"]
+            //"externalDependencies":['/components/mbostock/d3/d3.min.js','/components/mozilla/metrics-graphics/dist/metricsgraphics.min.js']
         }
     };
 

@@ -41,5 +41,10 @@ angular.module("rubedoBlocks").lazy.controller("InsightsStatsController",["$scop
         });
 
     };
-    me.drawGraph();
+    $script('/components/mbostock/d3/d3.min.js', function () {
+        $script('/components/mozilla/metrics-graphics/dist/metricsgraphics.min.js', function () {
+            me.drawGraph();
+        });
+    });
+
 }]);
