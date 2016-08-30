@@ -10,7 +10,6 @@ angular.module("rubedoBlocks").lazy.controller("InsightsRepartitionController",[
     me.drawGraph=function(){
         RubedoClickStreamService.getEventFacet(me.queryParams).then(function(response){
             if (response.data.success){
-                console.log(response.data.data);
                 var newData=[];
                 angular.forEach(response.data.data,function(item){
                     newData.push({
@@ -18,21 +17,29 @@ angular.module("rubedoBlocks").lazy.controller("InsightsRepartitionController",[
                         value:item.doc_count
                     })
                 });
-                var pie = new d3pie("#block"+$scope.block.id, {
-                    header: {
-                        title: {
-                            text: config.title
+                if(me.pie){
+                    me.pie.destroy();
+                }
+                    me.pie = new d3pie("#block"+$scope.block.id, {
+                        header: {
+                            title: {
+                                text: config.title
+                            },
+                            location: "pie-center"
                         },
-                        location: "pie-center"
-                    },
-                    size: {
-                        pieInnerRadius: "40%"
-                    },
-                    data: {
-                        sortOrder: "label-asc",
-                        content: newData
-                    }
-                });
+                        size: {
+                            pieInnerRadius: "40%",
+                            canvasHeight: config.height,
+                            canvasWidth: config.width
+                        },
+                        data: {
+                            sortOrder: "label-asc",
+                            content: newData
+                        }
+                    });
+
+
+
             }
         });
     };
