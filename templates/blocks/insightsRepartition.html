@@ -1,0 +1,20 @@
+<div ng-controller="InsightsRepartitionController as irCtrl">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <form class="form-inline" ng-submit="irCtrl.drawGraph()">
+                <div class="form-group">
+                    <label> From </label>
+                    <input type="date" class="form-control"  ng-model="irCtrl.queryParams.startDate" required>
+                </div>
+                <div class="form-group">
+                    <label> to </label>
+                    <input type="date" class="form-control" ng-model="irCtrl.queryParams.endDate" required>
+                </div>
+                <button type="submit" class="btn btn-default">Redraw</button>
+            </form>
+        </div>
+        <div class="panel-body">
+            <div id="{{'block'+block.id}}"></div>
+        </div>
+    </div>
+</div>

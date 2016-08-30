@@ -723,10 +723,15 @@
                 }));
             }
         };
-        serviceInstance.getEventHistogram=function(filters){
+        serviceInstance.getEventHistogram=function(params){
           return ($http.get(config.baseUrl+"/clickstream/histogram",{
-              params:filters
+              params:params
           }));
+        };
+        serviceInstance.getEventFacet=function(params){
+            return ($http.get(config.baseUrl+"/clickstream/eventfacet",{
+                params:params
+            }));
         };
         return serviceInstance;
     }]);
