@@ -74,15 +74,15 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
         me.queryParams.filters=JSON.stringify(params);
         RubedoClickStreamService.getGeoAgg(me.queryParams).then(function(response){
             if (response.data.success){
-                console.log(response.data.data);
-                //delete (response.data.data.events);
-                //me.facets=response.data.data;
-                //var filterCopy=angular.copy(me.filterParam);
-                //if (config.events&&config.events.length>0){
-                //    delete(filterCopy.event);
-                //}
-                //me.activeFacets=filterCopy;
-                //me.hasActiveFacets=Object.keys(me.activeFacets).length>0;
+                console.log(response.data.data.hash.buckets);
+                delete (response.data.data.hash);
+                me.facets=response.data.data;
+                var filterCopy=angular.copy(me.filterParam);
+                if (config.events&&config.events.length>0){
+                    delete(filterCopy.event);
+                }
+                me.activeFacets=filterCopy;
+                me.hasActiveFacets=Object.keys(me.activeFacets).length>0;
             }
         });
     };
