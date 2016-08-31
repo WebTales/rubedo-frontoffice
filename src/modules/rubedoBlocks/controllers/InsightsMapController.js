@@ -74,7 +74,45 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
         me.queryParams.filters=JSON.stringify(params);
         RubedoClickStreamService.getGeoAgg(me.queryParams).then(function(response){
             if (response.data.success){
-                console.log(response.data.data.hash.buckets);
+                //console.log(response.data.data.hash.buckets);
+                //var pointData=[
+                //    {
+                //        key: "u09tv",
+                //        doc_count: 41,
+                //        minlat: 48.8232421875,
+                //        minlon: 2.3291015625,
+                //        maxlat: 48.8671875,
+                //        maxlon: 2.373046875,
+                //        medlat: 48.84521484375,
+                //        medlon: 2.35107421875
+                //    },
+                //    {
+                //        key: "u09vb",
+                //        doc_count: 10,
+                //        minlat: 48.8232421875,
+                //        minlon: 2.4609375,
+                //        maxlat: 48.8671875,
+                //        maxlon: 2.5048828125,
+                //        medlat: 48.84521484375,
+                //        medlon: 2.48291015625
+                //    }
+                //];
+                var pointData=response.data.data.hash.buckets;
+                var dataPoints=[];
+                angular.forEach(pointData,function(point){
+                    dataPoints.push({
+                        location:new google.maps.LatLng(point.medlat,point.medlon),
+                        weight:point.doc_count
+                    });
+                });
+                if(me.heatMap){
+                    me.heatMap.setData(dataPoints);
+                } else {
+                    me.heatMap=new google.maps.visualization.HeatmapLayer({
+                        data: dataPoints,
+                        map: me.mapControl.getGMap()
+                    });
+                }
                 delete (response.data.data.hash);
                 me.facets=response.data.data;
                 var filterCopy=angular.copy(me.filterParam);
