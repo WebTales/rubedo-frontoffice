@@ -37,7 +37,15 @@
             </div>
         </div>
         <div class="panel-body">
-            <div id="{{'block'+block.id}}"></div>
+            <div ng-style="{height:'{{isCtrl.height}}',width:'100%'}">
+                <google-map ng-if="isCtrl.display()"
+                            center="isCtrl.map.center"
+                            zoom="isCtrl.map.zoom"
+                            events="isCtrl.mapEvents"
+                            control="isCtrl.mapControl"
+                            draggable="true">
+                </google-map>
+            </div>
         </div>
     </div>
 </div>
