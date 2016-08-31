@@ -74,7 +74,7 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
         me.queryParams.filters=JSON.stringify(params);
         RubedoClickStreamService.getGeoAgg(me.queryParams).then(function(response){
             if (response.data.success){
-                
+
                 var pointData=response.data.data.hash.buckets;
                 var dataPoints=[];
                 angular.forEach(pointData,function(point){

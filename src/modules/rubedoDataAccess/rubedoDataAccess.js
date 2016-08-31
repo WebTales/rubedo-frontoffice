@@ -196,9 +196,6 @@
                     params.simulatedTime=getParams.preview_date;
                 }
             }
-            if (params.ismagic&&config.fingerprint){
-                params.fingerprint =  config.fingerprint;
-            }
             return ($http.get(config.baseUrl+"/contents", {
                 params: params
             }));
@@ -263,9 +260,6 @@
                 if (getParams.preview_date&&getParams.preview_date!=""){
                     params.simulatedTime=getParams.preview_date;
                 }
-            }
-            if (params.ismagic&&config.fingerprint){
-                params.fingerprint =  config.fingerprint;
             }
             return ($http.get(config.baseUrl+"/ecommerce/products", {
                 params: params

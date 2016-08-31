@@ -13,7 +13,6 @@ angular.module("rubedoBlocks").lazy.controller("ProductListController",['$scope'
     }
     me.start = config.resultsSkip?config.resultsSkip:0;
     me.limit = config.pageSize?config.pageSize:12;
-    me.ismagic = config.magicQuery ? config.magicQuery : false;
     me.imageField= config.imageField ? config.imageField : "image";
     me.imageHeight= config.imageHeight ? config.imageHeight : null;
     me.imageWidth= config.imageWidth ? config.imageWidth : null;
@@ -26,7 +25,6 @@ angular.module("rubedoBlocks").lazy.controller("ProductListController",['$scope'
     var options = {
         start: me.start,
         limit: me.limit,
-        ismagic: me.ismagic,
         'fields[]' : ["text","summary",me.imageField]
     };
     if(config.singlePage){
