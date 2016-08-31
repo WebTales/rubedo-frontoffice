@@ -74,29 +74,7 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
         me.queryParams.filters=JSON.stringify(params);
         RubedoClickStreamService.getGeoAgg(me.queryParams).then(function(response){
             if (response.data.success){
-                //console.log(response.data.data.hash.buckets);
-                //var pointData=[
-                //    {
-                //        key: "u09tv",
-                //        doc_count: 41,
-                //        minlat: 48.8232421875,
-                //        minlon: 2.3291015625,
-                //        maxlat: 48.8671875,
-                //        maxlon: 2.373046875,
-                //        medlat: 48.84521484375,
-                //        medlon: 2.35107421875
-                //    },
-                //    {
-                //        key: "u09vb",
-                //        doc_count: 10,
-                //        minlat: 48.8232421875,
-                //        minlon: 2.4609375,
-                //        maxlat: 48.8671875,
-                //        maxlon: 2.5048828125,
-                //        medlat: 48.84521484375,
-                //        medlon: 2.48291015625
-                //    }
-                //];
+                
                 var pointData=response.data.data.hash.buckets;
                 var dataPoints=[];
                 angular.forEach(pointData,function(point){
@@ -110,7 +88,26 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
                 } else {
                     me.heatMap=new google.maps.visualization.HeatmapLayer({
                         data: dataPoints,
-                        map: me.mapControl.getGMap()
+                        map: me.mapControl.getGMap(),
+                        opacity:0.9,
+                        radius:30,
+                        gradient:[
+                            'rgba(255, 255, 255, 0)',
+                            '#A1DBF2',
+                            '#A7D1E6',
+                            '#AEC7DB',
+                            '#B5BDD0',
+                            '#BCB3C5',
+                            '#C3AABA',
+                            '#CAA0AF',
+                            '#D096A3',
+                            '#D78C98',
+                            '#DE838D',
+                            '#E57982',
+                            '#EC6F77',
+                            '#F3656C',
+                            '#FA5B61'
+                        ]
                     });
                 }
                 delete (response.data.data.hash);
