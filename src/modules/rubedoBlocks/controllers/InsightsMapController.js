@@ -15,6 +15,7 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
         },
         zoom:config.zoom ? config.zoom : 14
     };
+    me.geocoder = new google.maps.Geocoder();
     //set initial map center
     if (config.useLocation&&navigator.geolocation){
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -44,7 +45,7 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
         };
     }
     me.height = config.height ? config.height + "px" : "500px";
-    me.geocoder = new google.maps.Geocoder();
+
     if (config.events&&config.events.length>0){
         me.filterParam.event=config.events;
     }
