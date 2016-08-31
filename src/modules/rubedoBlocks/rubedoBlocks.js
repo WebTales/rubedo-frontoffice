@@ -228,6 +228,10 @@
         "insightsRepartition": {
             "template": "/templates/blocks/insightsRepartition.html",
             "internalDependencies":["/src/modules/rubedoBlocks/controllers/InsightsRepartitionController.js"]
+        },
+        "insightsMap": {
+            "template": "/templates/blocks/insightsMap.html",
+            "internalDependencies":["/src/modules/rubedoBlocks/controllers/InsightsMapController.js"]
         }
     };
 

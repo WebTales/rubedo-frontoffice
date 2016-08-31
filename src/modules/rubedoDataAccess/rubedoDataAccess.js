@@ -733,6 +733,11 @@
                 params:params
             }));
         };
+        serviceInstance.getGeoAgg=function(params){
+            return ($http.get(config.baseUrl+"/clickstream/geoagg",{
+                params:params
+            }));
+        };
         return serviceInstance;
     }]);
 
