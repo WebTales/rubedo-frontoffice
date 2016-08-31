@@ -15,6 +15,34 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
         },
         zoom:config.zoom ? config.zoom : 14
     };
+    //set initial map center
+    if (config.useLocation&&navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(function(position) {
+            me.map.center={
+                latitude:position.coords.latitude,
+                longitude:position.coords.longitude
+            };
+        }, function() {
+            //handle geoloc error
+        });
+    } else if (config.centerAddress){
+        me.geocoder.geocode({
+            'address' : config.centerAddress
+        }, function(results, status) {
+            if (status == google.maps.GeocoderStatus.OK) {
+                me.map.center={
+                    latitude:results[0].geometry.location.lat(),
+                    longitude:results[0].geometry.location.lng()
+                };
+            }
+        });
+
+    } else if (config.centerLatitude && config.centerLongitude){
+        me.map.center={
+            latitude:config.centerLatitude,
+            longitude:config.centerLongitude
+        };
+    }
     me.height = config.height ? config.height + "px" : "500px";
     me.geocoder = new google.maps.Geocoder();
     if (config.events&&config.events.length>0){
@@ -74,5 +102,41 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
             $element.find(".angular-google-map-container").height(config.height);
         },190);
     }
+    setTimeout(function(){
+        if(!me.count||me.count==0){
+            google.maps.event.trigger(me.mapControl.getGMap(), 'resize');
+            if (config.useLocation&&navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    me.mapControl.getGMap().setCenter(new google.maps.LatLng({
+                        lat:position.coords.latitude,
+                        lng:position.coords.longitude
+                    }));
+
+
+                }, function() {
+                    //handle geoloc error
+                });
+            } else if (config.centerAddress){
+                me.geocoder.geocode({
+                    'address' : config.centerAddress
+                }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        me.mapControl.getGMap().setCenter(new google.maps.LatLng({
+                            lat:results[0].geometry.location.lat(),
+                            lng:results[0].geometry.location.lng()
+                        }));
+
+                    }
+                });
+
+            } else if (config.centerLatitude && config.centerLongitude){
+                me.mapControl.getGMap().setCenter(new google.maps.LatLng({
+                    lat:config.centerLatitude,
+                    lng:config.centerLongitude
+                }));
+
+            }
+        }
+    },3200);
 
 }]);
