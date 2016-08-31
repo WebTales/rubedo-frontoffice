@@ -5,8 +5,7 @@ angular.module("rubedoBlocks").lazy.controller("CarouselController",["$scope","R
     var queryOptions={
         start: blockConfig.resultsSkip ? blockConfig.resultsSkip : 0,
         limit: blockConfig.pageSize ? blockConfig.pageSize : 6,
-        'fields[]' : ["text","summary",blockConfig.imageField],
-        ismagic: blockConfig.magicQuery ? blockConfig.magicQuery : false
+        'fields[]' : ["text","summary",blockConfig.imageField]
     };
     if (blockConfig.imageField && blockConfig.imageField!="") {
     	queryOptions['requiredFields[]'] = [blockConfig.imageField];
