@@ -815,11 +815,17 @@
 
     var myHttpServ=injector.get("$http");
     var pathsplit=window.location.pathname.split("/");
+    var ipcDirect=injector.get("ipCookie");
+    var directAccessToken=ipcDirect('accessToken');
+    var structureParams= {
+        site: window.location.host,
+        lang: pathsplit[1]
+    };
+    if(directAccessToken){
+        structureParams.access_token=directAccessToken;
+    }
     myHttpServ.get(config.baseUrl+"/sitestructure",{
-        params:{
-            site:window.location.host,
-            lang:pathsplit[1]
-        }
+        params:structureParams
     }).then(function(response){
         if(response.data.success){
             StoredSitePages=response.data.pages;
