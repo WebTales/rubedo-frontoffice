@@ -181,7 +181,7 @@
         };
         serviceInstance.executeAction=function(action){
             var replaceArray={
-                'USER.DATA.':"serviceInstance.fingerprintData.",
+                'USER.DATA.':"",
                 'USER.ISCONNECTED':'USER.ISCONNECTED()',
                 'USER.ISGEOLOCATED':'USER.ISGEOLOCATED()',
                 'USER.RUID':'USER.RUID()',
