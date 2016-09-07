@@ -191,6 +191,7 @@
                 'USER.RUID':'SPECIALREPLACER.RUID()',
                 'USER.EMAIL':'SPECIALREPLACER.EMAIL()',
                 'USER.ISEMAILVALID':'SPECIALREPLACER.ISEMAILVALID()',
+                'USER\.([^,) ]*)':'"$1"',
                 'USER\.':"",
                 'SPECIALREPLACER.':"USER.",
                 'SESSION.DURATION':'SESSION.DURATION()',
