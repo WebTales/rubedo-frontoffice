@@ -172,6 +172,7 @@
                 'PAGE.NBVIEWS':'PAGE.NBVIEWS()',
                 'PAGE.TIMEONPAGE':'PAGE.TIMEONPAGE()',
                 'PAGE.REFERRER':'PAGE.REFERRER()',
+                'TIME':'TIME()',
                 ' NOT = ':'!=',
                 ' AND ':'&&',
                 ' = ':'==',
@@ -197,6 +198,7 @@
                 'SESSION.DURATION':'SESSION.DURATION()',
                 'PAGE.TIMEONPAGE':'PAGE.TIMEONPAGE()',
                 'PAGE.REFERRER':'PAGE.REFERRER()',
+                'TIME':'TIME()',
                 ' AND ':'&&',
                 ' OR ':'||',
                 ' NOT ':'!',
@@ -416,6 +418,10 @@
 
         SESSION=UXSessionService;
         $scope.SESSION=SESSION;
+
+        TIME=function(){
+            return(Math.floor(Date.now() / 1000));
+        }
 
     }]);
 
