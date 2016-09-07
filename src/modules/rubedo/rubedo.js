@@ -161,12 +161,13 @@
         };
         serviceInstance.evaluateCondition=function(condition){
             var replaceArray={
-                'USER.DATA.':"serviceInstance.fingerprintData.",
-                'USER.ISCONNECTED':'USER.ISCONNECTED()',
-                'USER.ISGEOLOCATED':'USER.ISGEOLOCATED()',
-                'USER.RUID':'USER.RUID()',
-                'USER.EMAIL':'USER.EMAIL()',
-                'USER.ISEMAILVALID':'USER.ISEMAILVALID()',
+                'USER.ISCONNECTED':'USERINT.ISCONNECTED()',
+                'USER.ISGEOLOCATED':'USERINT.ISGEOLOCATED()',
+                'USER.RUID':'USERINT.RUID()',
+                'USER.EMAIL':'USERINT.EMAIL()',
+                'USER.ISEMAILVALID':'USERINT.ISEMAILVALID()',
+                'USER.':"serviceInstance.fingerprintData.",
+                'USERINT.':"USER.",
                 'SESSION.DURATION':'SESSION.DURATION()',
                 'PAGE.NBVIEWS':'PAGE.NBVIEWS()',
                 'PAGE.TIMEONPAGE':'PAGE.TIMEONPAGE()',
@@ -185,12 +186,13 @@
         };
         serviceInstance.executeAction=function(action){
             var replaceArray={
-                'USER.DATA.':"",
-                'USER.ISCONNECTED':'USER.ISCONNECTED()',
-                'USER.ISGEOLOCATED':'USER.ISGEOLOCATED()',
-                'USER.RUID':'USER.RUID()',
-                'USER.EMAIL':'USER.EMAIL()',
-                'USER.ISEMAILVALID':'USER.ISEMAILVALID()',
+                'USER.ISCONNECTED':'USERINT.ISCONNECTED()',
+                'USER.ISGEOLOCATED':'USERINT.ISGEOLOCATED()',
+                'USER.RUID':'USERINT.RUID()',
+                'USER.EMAIL':'USERINT.EMAIL()',
+                'USER.ISEMAILVALID':'USERINT.ISEMAILVALID()',
+                'USER.':"",
+                'USERINT.':"USER.",
                 'SESSION.DURATION':'SESSION.DURATION()',
                 'PAGE.TIMEONPAGE':'PAGE.TIMEONPAGE()',
                 'PAGE.REFERRER':'PAGE.REFERRER()',
