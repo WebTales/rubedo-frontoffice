@@ -56,6 +56,9 @@
             }
             return(serviceInstance.emailRegex.test(current.user.email));
         };
+        serviceInstance.EMAIL=function(){
+            return serviceInstance.ISEMAILVALID ? current.user.email : false;
+        };
         serviceInstance.SUBSCRIBEDTO=function(mailingList){
             return current.user&&current.user.mailingLists&&current.user.mailingLists[mailingList]&&current.user.mailingLists[mailingList].status ? true : false;
         };
@@ -162,6 +165,7 @@
                 'USER.ISCONNECTED':'USER.ISCONNECTED()',
                 'USER.ISGEOLOCATED':'USER.ISGEOLOCATED()',
                 'USER.RUID':'USER.RUID()',
+                'USER.EMAIL':'USER.EMAIL()',
                 'USER.ISEMAILVALID':'USER.ISEMAILVALID()',
                 'SESSION.DURATION':'SESSION.DURATION()',
                 'PAGE.NBVIEWS':'PAGE.NBVIEWS()',
@@ -185,6 +189,7 @@
                 'USER.ISCONNECTED':'USER.ISCONNECTED()',
                 'USER.ISGEOLOCATED':'USER.ISGEOLOCATED()',
                 'USER.RUID':'USER.RUID()',
+                'USER.EMAIL':'USER.EMAIL()',
                 'USER.ISEMAILVALID':'USER.ISEMAILVALID()',
                 'SESSION.DURATION':'SESSION.DURATION()',
                 'PAGE.TIMEONPAGE':'PAGE.TIMEONPAGE()',
