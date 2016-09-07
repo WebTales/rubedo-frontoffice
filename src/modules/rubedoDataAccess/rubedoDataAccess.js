@@ -766,15 +766,15 @@
                     }
                 }
                 if (operator=="set"){
-                    config[property]=value;
+                    config.fingerPrintData[property]=value;
                 } else {
-                    if (!config[property]){
-                        config[property]=0;
+                    if (!config.fingerPrintData[property]){
+                        config.fingerPrintData[property]=0;
                     }
                     if (operator=="inc"){
-                        config[property]=config[property]+value;
+                        config.fingerPrintData[property]=config.fingerPrintData[property]+value;
                     } else if (operator=="dec"){
-                        config[property]=config[property]-value;
+                        config.fingerPrintData[property]=config.fingerPrintData[property]-value;
                     }
                 }
                 $http({
