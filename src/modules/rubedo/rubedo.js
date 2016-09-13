@@ -427,6 +427,7 @@
 
     app.controller("PageBodyController",['RubedoPagesService', 'RubedoModuleConfigService','$scope','RubedoBlockDependencyResolver','$rootScope','UXCore','$timeout',function(RubedoPagesService, RubedoModuleConfigService,$scope,RubedoBlockDependencyResolver,$rootScope,UXCore,$timeout){
         var me=this;
+        jQuery('.modal').modal('hide');
         if ($scope.rubedo.fieldEditMode){
             $scope.rubedo.revertChanges();
         }
