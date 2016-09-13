@@ -265,7 +265,7 @@
                 if (window.ga) {
                     var a = document.createElement('a');
                     a.href = newLoc;
-                    window.ga('send', 'pageview', a.pathname);
+                    window.ga('send', 'pageview', a.pathname+a.search);
                 }
                 if (currentLoc&&currentLoc!=""&&currentLoc!=newLoc){
                     UXPageService.setAngReferrer(currentLoc);
