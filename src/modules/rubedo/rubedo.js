@@ -515,6 +515,18 @@
                         UXCore.parse(newPage.pageProperties.UXInstructions);
                     }
 
+                } else if (newPage.pageProperties&&newPage.pageProperties.cauldronInstructions&&newPage.pageProperties.cauldronInstructions!=""){
+                    if (newPage.pageProperties.cauldronInstructions.indexOf("\n")>-1){
+                        var maskInstructionsArray=newPage.pageProperties.cauldronInstructions.split("\n");
+                        angular.forEach(maskInstructionsArray,function(instruction){
+                            if(instruction!=""){
+                                UXCore.parse(instruction);
+                            }
+                        });
+                    } else {
+                        UXCore.parse(newPage.pageProperties.cauldronInstructions);
+                    }
+
                 }
                 if (newPage.UXInstructions&&newPage.UXInstructions!=""){
                     if (newPage.UXInstructions.indexOf("\n")>-1){
