@@ -528,6 +528,18 @@
                         UXCore.parse(newPage.UXInstructions);
                     }
 
+                } else if (newPage.cauldronInstructions&&newPage.cauldronInstructions!=""){
+                    if (newPage.cauldronInstructions.indexOf("\n")>-1){
+                        var instructionsArray=newPage.cauldronInstructions.split("\n");
+                        angular.forEach(instructionsArray,function(instruction){
+                            if(instruction!=""){
+                                UXCore.parse(instruction);
+                            }
+                        });
+                    } else {
+                        UXCore.parse(newPage.cauldronInstructions);
+                    }
+
                 }
                 //Page load
                 var allContentTerms=[];
