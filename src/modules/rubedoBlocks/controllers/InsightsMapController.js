@@ -77,10 +77,17 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
 
                 var pointData=response.data.data.hash.buckets;
                 var dataPoints=[];
+                var max=0;
+                angular.forEach(pointData,function(point){
+                    if(point.doc_count>max){
+                        max=point.doc_count;
+                    }
+                });
+                max=Math.floor(0.1*max);
                 angular.forEach(pointData,function(point){
                     dataPoints.push({
                         location:new google.maps.LatLng(point.medlat,point.medlon),
-                        weight:point.doc_count
+                        weight:point.doc_count==max ? point.doc_count : point.doc_count+max
                     });
                 });
                 if(me.heatMap){
