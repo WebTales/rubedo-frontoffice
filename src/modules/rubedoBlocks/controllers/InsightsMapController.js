@@ -83,6 +83,7 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
                         max=point.doc_count;
                     }
                 });
+                me.mapMax=max;
                 var compensator=Math.floor(0.1*max);
                 angular.forEach(pointData,function(point){
                     dataPoints.push({

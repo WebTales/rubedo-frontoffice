@@ -202,6 +202,15 @@
 .rubedo-insight-facet-box{
     padding-top:20px;
 }
+.rubedo-insight-gradient{
+    height: 10px;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0), #A1DBF2, #A7D1E6, #AEC7DB, #B5BDD0, #BCB3C5, #C3AABA, #CAA0AF, #D096A3, #D78C98, #DE838D, #E57982, #EC6F77, #F3656C, #FA5B61);
+    background: -moz-linear-gradient(left, rgba(255, 255, 255, 0), #A1DBF2, #A7D1E6, #AEC7DB, #B5BDD0, #BCB3C5, #C3AABA, #CAA0AF, #D096A3, #D78C98, #DE838D, #E57982, #EC6F77, #F3656C, #FA5B61);
+    background: -o-linear-gradient(left, rgba(255, 255, 255, 0), #A1DBF2, #A7D1E6, #AEC7DB, #B5BDD0, #BCB3C5, #C3AABA, #CAA0AF, #D096A3, #D78C98, #DE838D, #E57982, #EC6F77, #F3656C, #FA5B61);
+    background: linear-gradient(left, rgba(255, 255, 255, 0), #A1DBF2, #A7D1E6, #AEC7DB, #B5BDD0, #BCB3C5, #C3AABA, #CAA0AF, #D096A3, #D78C98, #DE838D, #E57982, #EC6F77, #F3656C, #FA5B61);
+}
 @media (max-width: 768px) {
     .dropdown-menu-large {
         margin-left: 0 ;
