@@ -83,11 +83,11 @@ angular.module("rubedoBlocks").lazy.controller("InsightsMapController",["$scope"
                         max=point.doc_count;
                     }
                 });
-                max=Math.floor(0.1*max);
+                var compensator=Math.floor(0.1*max);
                 angular.forEach(pointData,function(point){
                     dataPoints.push({
                         location:new google.maps.LatLng(point.medlat,point.medlon),
-                        weight:point.doc_count==max ? point.doc_count : point.doc_count+max
+                        weight:point.doc_count+compensator
                     });
                 });
                 if(me.heatMap){
