@@ -436,6 +436,7 @@
         });
         current.queue=[];
         current.rEvents={ };
+        current.UXParams.hiddenBlocks={};
         $scope.$on("ClickStreamEvent",function(event,args){
             if(args.csEvent&&current.rEvents[args.csEvent]){
                 angular.forEach(current.rEvents[args.csEvent],function(instructionToHandle){
