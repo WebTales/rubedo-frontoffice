@@ -479,6 +479,10 @@
                 }
                 newPage.metaAuthor = response.data.site.author?response.data.site.author:'Rubedo by Webtales';
                 current.page=newPage;
+                var isFirstSiteLoad=false;
+                if(!current.site.locale){
+                    isFirstSiteLoad=true;
+                }
                 current.site=angular.copy(response.data.site);
                 current.breadcrumb=angular.copy(response.data.breadcrumb);
                 if (response.data.site.locStrategy == 'fallback'){
@@ -568,6 +572,23 @@
                 if(newPage.clickStreamEvent&&newPage.clickStreamEvent!=""){
                     $rootScope.$broadcast("ClickStreamEvent",{csEvent:newPage.clickStreamEvent});
                 }
+
+                if (isFirstSiteLoad && current.site.enableServiceWorker && window.location.protocol=="https:" &&'serviceWorker' in navigator) {
+                    var dc = "";
+                    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+                    for (var i = 0; i < 5; i++)
+                        dc += possible.charAt(Math.floor(Math.random() * possible.length));
+
+                    navigator.serviceWorker.register('/serviceworker.js?dc='+ dc, {scope: '/'});
+                } else if (isFirstSiteLoad && !current.site.enableServiceWorker && window.location.protocol=="https:" &&'serviceWorker' in navigator){
+                    navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                        angular.forEach(registrations,function(registration) {
+                            registration.unregister()
+                        });
+                    });
+                }
+
 
             }
         },function(response){
